@@ -94,6 +94,7 @@ public class VolunteerDetails extends JDialog {
         detailPanel.setName("Dettagli arruolato");
         detailPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Dettagli arruolato", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         nameField = new JTextField();
+        nameField.setEditable(false);
         nameField.setPreferredSize(new Dimension(100, 30));
         CellConstraints cc = new CellConstraints();
         detailPanel.add(nameField, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.CENTER));
@@ -104,13 +105,15 @@ public class VolunteerDetails extends JDialog {
         surnameLabel.setText("Cognome");
         detailPanel.add(surnameLabel, cc.xy(2, 1, CellConstraints.LEFT, CellConstraints.DEFAULT));
         surnameField = new JTextField();
-        surnameField.setEditable(true);
+        surnameField.setEditable(false);
         surnameField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(surnameField, cc.xy(2, 2, CellConstraints.FILL, CellConstraints.CENTER));
         birthDateField = new JTextField();
+        birthDateField.setEditable(false);
         birthDateField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(birthDateField, cc.xy(1, 4, CellConstraints.FILL, CellConstraints.CENTER));
         birthPlaceField = new JTextField();
+        birthPlaceField.setEditable(false);
         birthPlaceField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(birthPlaceField, cc.xy(2, 4, CellConstraints.FILL, CellConstraints.CENTER));
         birthDateLabel = new JLabel();
@@ -120,9 +123,11 @@ public class VolunteerDetails extends JDialog {
         birthPlaceLabel.setText("Luogo di nascita");
         detailPanel.add(birthPlaceLabel, cc.xy(2, 3, CellConstraints.LEFT, CellConstraints.DEFAULT));
         phoneField = new JTextField();
+        phoneField.setEditable(false);
         phoneField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(phoneField, cc.xy(1, 6, CellConstraints.FILL, CellConstraints.CENTER));
         emailField = new JTextField();
+        emailField.setEditable(false);
         emailField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(emailField, cc.xy(2, 6, CellConstraints.FILL, CellConstraints.CENTER));
         phoneLabel = new JLabel();
@@ -132,6 +137,7 @@ public class VolunteerDetails extends JDialog {
         emailLabel.setText("e-mail");
         detailPanel.add(emailLabel, cc.xy(2, 5, CellConstraints.LEFT, CellConstraints.DEFAULT));
         residenceField = new JTextField();
+        residenceField.setEditable(false);
         residenceField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(residenceField, cc.xy(1, 8, CellConstraints.FILL, CellConstraints.CENTER));
         residenceLabel = new JLabel();
@@ -142,42 +148,49 @@ public class VolunteerDetails extends JDialog {
         final JSeparator separator2 = new JSeparator();
         detailPanel.add(separator2, cc.xy(2, 9, CellConstraints.FILL, CellConstraints.FILL));
         registrationNumberField = new JTextField();
+        registrationNumberField.setEditable(false);
         registrationNumberField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(registrationNumberField, cc.xy(1, 11, CellConstraints.FILL, CellConstraints.CENTER));
         registrationNumberLabel = new JLabel();
         registrationNumberLabel.setText("Num. Matricola");
         detailPanel.add(registrationNumberLabel, cc.xy(1, 10, CellConstraints.LEFT, CellConstraints.DEFAULT));
         feeField = new JTextField();
+        feeField.setEditable(false);
         feeField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(feeField, cc.xy(2, 11, CellConstraints.FILL, CellConstraints.CENTER));
         feeLabel = new JLabel();
         feeLabel.setText("Quota ass.");
         detailPanel.add(feeLabel, cc.xy(2, 10, CellConstraints.LEFT, CellConstraints.DEFAULT));
         rankField = new JTextField();
+        rankField.setEditable(false);
         rankField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(rankField, cc.xy(1, 13, CellConstraints.FILL, CellConstraints.CENTER));
         rankLabel = new JLabel();
         rankLabel.setText("Grado");
         detailPanel.add(rankLabel, cc.xy(1, 12, CellConstraints.LEFT, CellConstraints.FILL));
         lastRecallField = new JTextField();
+        lastRecallField.setEditable(false);
         lastRecallField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(lastRecallField, cc.xy(2, 13, CellConstraints.FILL, CellConstraints.CENTER));
         lastRecallLabel = new JLabel();
         lastRecallLabel.setText("Ultimo richiamo");
         detailPanel.add(lastRecallLabel, cc.xy(2, 12));
         activityField = new JTextField();
+        activityField.setEditable(false);
         activityField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(activityField, cc.xy(1, 15, CellConstraints.FILL, CellConstraints.DEFAULT));
         activityLabel = new JLabel();
         activityLabel.setText("Attività");
         detailPanel.add(activityLabel, cc.xy(1, 14));
         lastVisitField = new JTextField();
+        lastVisitField.setEditable(false);
         lastVisitField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(lastVisitField, cc.xy(1, 17, CellConstraints.FILL, CellConstraints.DEFAULT));
         lastVisitLabel = new JLabel();
         lastVisitLabel.setText("Ultima visita");
         detailPanel.add(lastVisitLabel, cc.xy(1, 16));
         nextVisitField = new JTextField();
+        nextVisitField.setEditable(false);
         nextVisitField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(nextVisitField, cc.xy(2, 17, CellConstraints.FILL, CellConstraints.CENTER));
         nextVisitLabel = new JLabel();
@@ -191,4 +204,5 @@ public class VolunteerDetails extends JDialog {
     public JComponent $$$getRootComponent$$$() {
         return detailPanel;
     }
+
 }
