@@ -3,13 +3,16 @@ package it.cri.demo.ui;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class VolunteerDetails extends JDialog {
+
+public class VolunteerInsert extends JDialog {
     private JPanel detailPanel;
     private JTextField nameField;
     private JTextField surnameField;
@@ -39,34 +42,41 @@ public class VolunteerDetails extends JDialog {
     private JLabel activityLabel;
     private JLabel lastVisitLabel;
     private JLabel nextVisitLabel;
-    private final Volunteer volunteer;
+    private JButton saveButton;
+    private JButton cancelButton;
+    private final VolunteerService service;
 
-    public VolunteerDetails(Frame owner, Volunteer v) throws HeadlessException {
-        super(owner, "Dettagli arruolato", true);
-        this.volunteer = v;
-        updateFields();
+
+    public VolunteerInsert(Frame owner, VolunteerService service) throws HeadlessException {
+        super(owner, "Nuovo arruolato", false);
         setContentPane(detailPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 500);
-        setTitle("Dettagli arruolato");
+        setTitle("Nuovo arruolato");
         setVisible(true);
+        this.service = service;
+
+        saveButton.addActionListener(e -> insertVolunteer());
+        cancelButton.addActionListener(e -> dispose());
     }
 
-    private void updateFields() {
-        this.nameField.setText(volunteer.getName() == null ? "-" : volunteer.getName());
-        this.surnameField.setText(volunteer.getSurname() == null ? "-" : volunteer.getSurname());
-        this.birthDateField.setText(volunteer.getBirthDate() == null ? "-" : volunteer.getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        this.birthPlaceField.setText(volunteer.getBirthPlace() == null ? "-" : volunteer.getBirthPlace());
-        this.phoneField.setText(volunteer.getPhoneNumber() == null ? "-" : volunteer.getPhoneNumber());
-        this.emailField.setText(volunteer.getEmailAddress() == null ? "-" : volunteer.getEmailAddress());
-        this.residenceField.setText(volunteer.getResidenceAddress() == null ? "-" : volunteer.getResidenceAddress());
-        this.registrationNumberField.setText(volunteer.getRegistrationNumber() == null ? "-" : volunteer.getRegistrationNumber());
-        this.feeField.setText(volunteer.getFee() == null ? "-" : String.valueOf(volunteer.getFee()));
-        this.rankField.setText(volunteer.getRankValue() == null ? "-" : volunteer.getRankValue());
-        this.lastRecallField.setText(volunteer.getLastRecall() == null ? "-" : volunteer.getLastRecall().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        this.activityField.setText(volunteer.getLastActivity() == null ? "-" : volunteer.getLastActivity());
-        this.lastVisitField.setText(volunteer.getLastMedicalVisit() == null ? "-" : volunteer.getLastMedicalVisit().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        this.nextVisitField.setText(volunteer.getNextMedicalVisit() == null ? "-" : volunteer.getNextMedicalVisit().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    private void insertVolunteer() {
+        Volunteer v = new Volunteer();
+        v.setName(nameField.getText());
+        v.setSurname(surnameField.getText());
+        v.setBirthDate(LocalDate.parse(birthDateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        v.setBirthPlace(birthPlaceField.getText());
+        v.setPhoneNumber(phoneField.getText());
+        v.setEmailAddress(emailField.getText());
+        v.setResidenceAddress(residenceField.getText());
+        v.setRegistrationNumber(registrationNumberField.getText());
+        v.setFee(Double.valueOf(feeField.getText()));
+        v.setRankValue(rankField.getText());
+        v.setLastRecall(LocalDate.parse(lastRecallField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        v.setLastActivity(activityField.getText());
+        v.setLastMedicalVisit(LocalDate.parse(lastVisitField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        v.setNextMedicalVisit(LocalDate.parse(nextVisitField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        service.save(v);
     }
 
     {
@@ -85,14 +95,14 @@ public class VolunteerDetails extends JDialog {
      */
     private void $$$setupUI$$$() {
         detailPanel = new JPanel();
-        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:14px:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:30px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow"));
+        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:14px:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:30px:noGrow,fill:max(d;4px):noGrow,fill:32px:noGrow,center:max(d;4px):noGrow"));
         detailPanel.setAlignmentX(0.5f);
         detailPanel.setAlignmentY(0.5f);
         detailPanel.setAutoscrolls(true);
         detailPanel.setName("Dettagli arruolato");
         detailPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Dettagli arruolato", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         nameField = new JTextField();
-        nameField.setEditable(false);
+        nameField.setEditable(true);
         nameField.setPreferredSize(new Dimension(100, 30));
         CellConstraints cc = new CellConstraints();
         detailPanel.add(nameField, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.CENTER));
@@ -103,15 +113,15 @@ public class VolunteerDetails extends JDialog {
         surnameLabel.setText("Cognome");
         detailPanel.add(surnameLabel, cc.xy(2, 1, CellConstraints.LEFT, CellConstraints.DEFAULT));
         surnameField = new JTextField();
-        surnameField.setEditable(false);
+        surnameField.setEditable(true);
         surnameField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(surnameField, cc.xy(2, 2, CellConstraints.FILL, CellConstraints.CENTER));
         birthDateField = new JTextField();
-        birthDateField.setEditable(false);
+        birthDateField.setEditable(true);
         birthDateField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(birthDateField, cc.xy(1, 4, CellConstraints.FILL, CellConstraints.CENTER));
         birthPlaceField = new JTextField();
-        birthPlaceField.setEditable(false);
+        birthPlaceField.setEditable(true);
         birthPlaceField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(birthPlaceField, cc.xy(2, 4, CellConstraints.FILL, CellConstraints.CENTER));
         birthDateLabel = new JLabel();
@@ -121,11 +131,11 @@ public class VolunteerDetails extends JDialog {
         birthPlaceLabel.setText("Luogo di nascita");
         detailPanel.add(birthPlaceLabel, cc.xy(2, 3, CellConstraints.LEFT, CellConstraints.DEFAULT));
         phoneField = new JTextField();
-        phoneField.setEditable(false);
+        phoneField.setEditable(true);
         phoneField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(phoneField, cc.xy(1, 6, CellConstraints.FILL, CellConstraints.CENTER));
         emailField = new JTextField();
-        emailField.setEditable(false);
+        emailField.setEditable(true);
         emailField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(emailField, cc.xy(2, 6, CellConstraints.FILL, CellConstraints.CENTER));
         phoneLabel = new JLabel();
@@ -135,7 +145,7 @@ public class VolunteerDetails extends JDialog {
         emailLabel.setText("e-mail");
         detailPanel.add(emailLabel, cc.xy(2, 5, CellConstraints.LEFT, CellConstraints.DEFAULT));
         residenceField = new JTextField();
-        residenceField.setEditable(false);
+        residenceField.setEditable(true);
         residenceField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(residenceField, cc.xy(1, 8, CellConstraints.FILL, CellConstraints.CENTER));
         residenceLabel = new JLabel();
@@ -146,54 +156,60 @@ public class VolunteerDetails extends JDialog {
         final JSeparator separator2 = new JSeparator();
         detailPanel.add(separator2, cc.xy(2, 9, CellConstraints.FILL, CellConstraints.FILL));
         registrationNumberField = new JTextField();
-        registrationNumberField.setEditable(false);
+        registrationNumberField.setEditable(true);
         registrationNumberField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(registrationNumberField, cc.xy(1, 11, CellConstraints.FILL, CellConstraints.CENTER));
         registrationNumberLabel = new JLabel();
         registrationNumberLabel.setText("Num. Matricola");
         detailPanel.add(registrationNumberLabel, cc.xy(1, 10, CellConstraints.LEFT, CellConstraints.DEFAULT));
         feeField = new JTextField();
-        feeField.setEditable(false);
+        feeField.setEditable(true);
         feeField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(feeField, cc.xy(2, 11, CellConstraints.FILL, CellConstraints.CENTER));
         feeLabel = new JLabel();
         feeLabel.setText("Quota ass.");
         detailPanel.add(feeLabel, cc.xy(2, 10, CellConstraints.LEFT, CellConstraints.DEFAULT));
         rankField = new JTextField();
-        rankField.setEditable(false);
+        rankField.setEditable(true);
         rankField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(rankField, cc.xy(1, 13, CellConstraints.FILL, CellConstraints.CENTER));
         rankLabel = new JLabel();
         rankLabel.setText("Grado");
         detailPanel.add(rankLabel, cc.xy(1, 12, CellConstraints.LEFT, CellConstraints.FILL));
         lastRecallField = new JTextField();
-        lastRecallField.setEditable(false);
+        lastRecallField.setEditable(true);
         lastRecallField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(lastRecallField, cc.xy(2, 13, CellConstraints.FILL, CellConstraints.CENTER));
         lastRecallLabel = new JLabel();
         lastRecallLabel.setText("Ultimo richiamo");
         detailPanel.add(lastRecallLabel, cc.xy(2, 12));
         activityField = new JTextField();
-        activityField.setEditable(false);
+        activityField.setEditable(true);
         activityField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(activityField, cc.xy(1, 15, CellConstraints.FILL, CellConstraints.DEFAULT));
         activityLabel = new JLabel();
         activityLabel.setText("Attività");
         detailPanel.add(activityLabel, cc.xy(1, 14));
         lastVisitField = new JTextField();
-        lastVisitField.setEditable(false);
+        lastVisitField.setEditable(true);
         lastVisitField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(lastVisitField, cc.xy(1, 17, CellConstraints.FILL, CellConstraints.DEFAULT));
         lastVisitLabel = new JLabel();
         lastVisitLabel.setText("Ultima visita");
         detailPanel.add(lastVisitLabel, cc.xy(1, 16));
         nextVisitField = new JTextField();
-        nextVisitField.setEditable(false);
+        nextVisitField.setEditable(true);
         nextVisitField.setPreferredSize(new Dimension(100, 30));
         detailPanel.add(nextVisitField, cc.xy(2, 17, CellConstraints.FILL, CellConstraints.CENTER));
         nextVisitLabel = new JLabel();
         nextVisitLabel.setText("Prox. visita");
         detailPanel.add(nextVisitLabel, cc.xy(2, 16));
+        saveButton = new JButton();
+        saveButton.setText("Salva");
+        detailPanel.add(saveButton, cc.xy(1, 18));
+        cancelButton = new JButton();
+        cancelButton.setText("Annulla");
+        detailPanel.add(cancelButton, cc.xy(2, 18));
     }
 
     /**

@@ -8,6 +8,8 @@ import it.cri.demo.service.VolunteerService;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,6 +18,8 @@ public class FormTest extends JFrame {
     private JList<Volunteer> list1;
     private DefaultListModel<Volunteer> listModel;
     private JScrollPane scrollPane;
+    private JButton insertButton;
+    private JButton refreshButton;
     private final VolunteerService service;
 
     public FormTest(VolunteerService service) throws HeadlessException {
@@ -24,13 +28,14 @@ public class FormTest extends JFrame {
         setContentPane(panel1);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("GUI Test");
-        setSize(800, 400);
+        setSize(800, 500);
         setVisible(true);
 
         listModel = new DefaultListModel<>();
         list1.setModel(listModel);
 
         updateListWiew();
+
         list1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -40,6 +45,18 @@ public class FormTest extends JFrame {
                 }
             }
         });
+//        insertButton.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                showInsertDialog();
+//            }
+//        });
+        insertButton.addActionListener(e -> showInsertDialog());
+        refreshButton.addActionListener(e -> updateListWiew());
+    }
+
+    private void showInsertDialog() {
+        new VolunteerInsert(this, service);
     }
 
     private void updateListWiew() {
@@ -67,7 +84,7 @@ public class FormTest extends JFrame {
      */
     private void $$$setupUI$$$() {
         panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:d:grow"));
+        panel1.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:341px:grow,center:34px:noGrow,center:max(d;4px):noGrow"));
         panel1.setPreferredSize(new Dimension(800, 400));
         panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Lista arruolati", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         scrollPane = new JScrollPane();
@@ -77,6 +94,12 @@ public class FormTest extends JFrame {
         final DefaultListModel defaultListModel1 = new DefaultListModel();
         list1.setModel(defaultListModel1);
         scrollPane.setViewportView(list1);
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuovo arruolato");
+        panel1.add(insertButton, cc.xy(1, 2));
+        refreshButton = new JButton();
+        refreshButton.setText("Aggiorna lista");
+        panel1.add(refreshButton, cc.xy(1, 3));
     }
 
     /**
@@ -85,4 +108,5 @@ public class FormTest extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }
