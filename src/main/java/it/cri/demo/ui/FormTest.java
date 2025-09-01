@@ -65,7 +65,7 @@ public class FormTest extends JFrame {
     }
 
     private void showVolunteerDialog(Volunteer v) {
-        new VolunteerDetails(this, v).setVisible(true);
+        new VolunteerDetails(this, this.service, v).setVisible(true);
     }
 
     {

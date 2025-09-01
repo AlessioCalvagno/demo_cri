@@ -3,10 +3,14 @@ package it.cri.demo.ui;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class VolunteerDetails extends JDialog {
@@ -39,17 +43,61 @@ public class VolunteerDetails extends JDialog {
     private JLabel activityLabel;
     private JLabel lastVisitLabel;
     private JLabel nextVisitLabel;
-    private final Volunteer volunteer;
+    private JButton deleteButton;
+    private JButton updateButton;
+    private JButton saveUpdateButton;
+    private JButton cancelUpdateButton;
+    private Volunteer volunteer;
+    private final VolunteerService service;
 
-    public VolunteerDetails(Frame owner, Volunteer v) throws HeadlessException {
+    public VolunteerDetails(Frame owner, VolunteerService service, Volunteer v) throws HeadlessException {
         super(owner, "Dettagli arruolato", true);
         this.volunteer = v;
+        this.service = service;
         updateFields();
         setContentPane(detailPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 500);
         setTitle("Dettagli arruolato");
         setVisible(true);
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                enableFormEdit();
+            }
+        });
+        cancelUpdateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                disableFormEdit();
+            }
+        });
+        saveUpdateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateVolunteer();
+                updateFields();
+                disableFormEdit();
+            }
+        });
+    }
+
+    private void updateVolunteer() {
+        volunteer.setName(nameField.getText());
+        volunteer.setSurname(surnameField.getText());
+        volunteer.setBirthDate(LocalDate.parse(birthDateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        volunteer.setBirthPlace(birthPlaceField.getText());
+        volunteer.setPhoneNumber(phoneField.getText());
+        volunteer.setEmailAddress(emailField.getText());
+        volunteer.setResidenceAddress(residenceField.getText());
+        volunteer.setRegistrationNumber(registrationNumberField.getText());
+        volunteer.setFee(Double.valueOf(feeField.getText()));
+        volunteer.setRankValue(rankField.getText());
+        volunteer.setLastRecall(LocalDate.parse(lastRecallField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        volunteer.setLastActivity(activityField.getText());
+        volunteer.setLastMedicalVisit(LocalDate.parse(lastVisitField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        volunteer.setNextMedicalVisit(LocalDate.parse(nextVisitField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        this.volunteer = service.save(volunteer);
     }
 
     private void updateFields() {
@@ -69,6 +117,48 @@ public class VolunteerDetails extends JDialog {
         this.nextVisitField.setText(volunteer.getNextMedicalVisit() == null ? "-" : volunteer.getNextMedicalVisit().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
+    private void enableFormEdit() {
+        nameField.setEditable(true);
+        surnameField.setEditable(true);
+        birthDateField.setEditable(true);
+        birthPlaceField.setEditable(true);
+        phoneField.setEditable(true);
+        emailField.setEditable(true);
+        residenceField.setEditable(true);
+        registrationNumberField.setEditable(true);
+        feeField.setEditable(true);
+        rankField.setEditable(true);
+        lastRecallField.setEditable(true);
+        activityField.setEditable(true);
+        lastVisitField.setEditable(true);
+        nextVisitField.setEditable(true);
+        saveUpdateButton.setVisible(true);
+        cancelUpdateButton.setVisible(true);
+        updateButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+    }
+
+    private void disableFormEdit() {
+        nameField.setEditable(false);
+        surnameField.setEditable(false);
+        birthDateField.setEditable(false);
+        birthPlaceField.setEditable(false);
+        phoneField.setEditable(false);
+        emailField.setEditable(false);
+        residenceField.setEditable(false);
+        registrationNumberField.setEditable(false);
+        feeField.setEditable(false);
+        rankField.setEditable(false);
+        lastRecallField.setEditable(false);
+        activityField.setEditable(false);
+        lastVisitField.setEditable(false);
+        nextVisitField.setEditable(false);
+        saveUpdateButton.setVisible(false);
+        cancelUpdateButton.setVisible(false);
+        updateButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }
+
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
 // >>> IMPORTANT!! <<<
@@ -85,7 +175,7 @@ public class VolunteerDetails extends JDialog {
      */
     private void $$$setupUI$$$() {
         detailPanel = new JPanel();
-        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:14px:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:30px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow"));
+        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:14px:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:30px:noGrow,fill:max(d;4px):noGrow,fill:32px:noGrow,center:38px:noGrow,center:max(d;4px):noGrow"));
         detailPanel.setAlignmentX(0.5f);
         detailPanel.setAlignmentY(0.5f);
         detailPanel.setAutoscrolls(true);
@@ -194,6 +284,20 @@ public class VolunteerDetails extends JDialog {
         nextVisitLabel = new JLabel();
         nextVisitLabel.setText("Prox. visita");
         detailPanel.add(nextVisitLabel, cc.xy(2, 16));
+        deleteButton = new JButton();
+        deleteButton.setText("Elimina record");
+        detailPanel.add(deleteButton, cc.xy(2, 18));
+        updateButton = new JButton();
+        updateButton.setText("Modifica");
+        detailPanel.add(updateButton, cc.xy(1, 18));
+        cancelUpdateButton = new JButton();
+        cancelUpdateButton.setText("Annulla");
+        cancelUpdateButton.setVisible(false);
+        detailPanel.add(cancelUpdateButton, cc.xy(2, 19));
+        saveUpdateButton = new JButton();
+        saveUpdateButton.setText("Salva");
+        saveUpdateButton.setVisible(false);
+        detailPanel.add(saveUpdateButton, cc.xy(1, 19));
     }
 
     /**
