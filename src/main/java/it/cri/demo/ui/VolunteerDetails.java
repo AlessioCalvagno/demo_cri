@@ -69,7 +69,6 @@ public class VolunteerDetails extends JDialog {
             int res = JOptionPane.showConfirmDialog(deleteButton, "Eliminare arruolato " + volunteer.getName() + " " + volunteer.getSurname() + "?", "Elimina record", JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.WARNING_MESSAGE);
             // 0 = OK, 2 = CANCEL, -1 CLOSE DIALOG
-            System.out.println(res);
             if (res == 0) {
                 service.delete(volunteer);
                 dispose();
