@@ -3,7 +3,6 @@ package it.cri.demo;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.VolunteerService;
 import it.cri.demo.ui.FormTest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
