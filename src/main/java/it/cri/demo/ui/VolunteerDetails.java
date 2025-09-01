@@ -8,8 +8,6 @@ import it.cri.demo.service.VolunteerService;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -60,24 +58,21 @@ public class VolunteerDetails extends JDialog {
         setSize(800, 500);
         setTitle("Dettagli arruolato");
         setVisible(true);
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enableFormEdit();
-            }
+        updateButton.addActionListener(e -> enableFormEdit());
+        cancelUpdateButton.addActionListener(e -> disableFormEdit());
+        saveUpdateButton.addActionListener(e -> {
+            updateVolunteer();
+            updateFields();
+            disableFormEdit();
         });
-        cancelUpdateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                disableFormEdit();
-            }
-        });
-        saveUpdateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateVolunteer();
-                updateFields();
-                disableFormEdit();
+        deleteButton.addActionListener(e -> {
+            int res = JOptionPane.showConfirmDialog(deleteButton, "Eliminare arruolato " + volunteer.getName() + " " + volunteer.getSurname() + "?", "Elimina record", JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+            // 0 = OK, 2 = CANCEL, -1 CLOSE DIALOG
+            System.out.println(res);
+            if (res == 0) {
+                service.delete(volunteer);
+                dispose();
             }
         });
     }
@@ -175,7 +170,7 @@ public class VolunteerDetails extends JDialog {
      */
     private void $$$setupUI$$$() {
         detailPanel = new JPanel();
-        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:14px:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:30px:noGrow,fill:max(d;4px):noGrow,fill:32px:noGrow,center:38px:noGrow,center:max(d;4px):noGrow"));
+        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:14px:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow"));
         detailPanel.setAlignmentX(0.5f);
         detailPanel.setAlignmentY(0.5f);
         detailPanel.setAutoscrolls(true);

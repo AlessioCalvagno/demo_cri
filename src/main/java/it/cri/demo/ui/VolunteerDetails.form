@@ -15,10 +15,10 @@
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
-    <rowspec value="center:30px:noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
-    <rowspec value="fill:32px:noGrow"/>
-    <rowspec value="center:38px:noGrow"/>
+    <rowspec value="fill:max(d;4px):noGrow"/>
+    <rowspec value="fill:max(d;4px):noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:d:grow"/>
     <colspec value="fill:d:grow"/>

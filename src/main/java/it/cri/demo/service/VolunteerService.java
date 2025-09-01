@@ -26,4 +26,9 @@ public class VolunteerService {
     public Volunteer save(Volunteer obj) {
         return repository.save(obj);
     }
+
+    @Transactional
+    public void delete(Volunteer volunteer) {
+        repository.delete(volunteer);
+    }
 }
