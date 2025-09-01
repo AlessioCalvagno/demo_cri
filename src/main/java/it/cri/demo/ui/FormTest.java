@@ -45,12 +45,7 @@ public class FormTest extends JFrame {
                 }
             }
         });
-//        insertButton.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                showInsertDialog();
-//            }
-//        });
+
         insertButton.addActionListener(e -> showInsertDialog());
         refreshButton.addActionListener(e -> updateListWiew());
     }
