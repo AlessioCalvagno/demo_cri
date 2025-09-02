@@ -11,7 +11,7 @@
 	<groupId>it.cri</groupId>
 	<artifactId>demo</artifactId>
 	<version>1.0.0</version>
-	<name>demo</name>
+	<name>CRI-management-tool</name>
 	<description>Demo project for CRI management tool</description>
 	<url/>
 	<licenses>
@@ -61,6 +61,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
