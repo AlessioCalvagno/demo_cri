@@ -95,6 +95,12 @@ public class FormTest extends JFrame {
         refreshButton = new JButton();
         refreshButton.setText("Aggiorna lista");
         panel1.add(refreshButton, cc.xy(1, 3));
+        try {
+            System.out.println(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception e) {
+        }
     }
 
     /**
