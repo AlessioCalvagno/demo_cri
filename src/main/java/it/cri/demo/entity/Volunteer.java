@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 //@Data
@@ -33,9 +34,28 @@ public class Volunteer {
     //Quota associativa
     private Double fee;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "volunteer")
+    private List<AssociativeFee> associativeFees;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "volunteer")
+    private List<Brevet> brevets;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "volunteer")
+    private List<MedicalVisit> medicalVisits;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "volunteer")
+    private List<Promotion> promotions;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "volunteer")
+    private List<Qualification> qualifications;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "volunteer")
+    private List<Recall> recalls;
+
+
     @Override
     public String toString() {
-        return name + " " + surname;
+        return rankValue + " " + name + " " + surname;
     }
 
     public Long getId() {
