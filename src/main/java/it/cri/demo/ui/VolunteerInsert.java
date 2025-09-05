@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,6 +50,7 @@ public class VolunteerInsert extends JDialog {
     private JTextField pecField;
     private JLabel pecLabel;
     private JLabel residenceLabel;
+    private JButton fileButton;
     private final VolunteerService service;
 
 
@@ -66,6 +69,13 @@ public class VolunteerInsert extends JDialog {
             dispose();
         });
         cancelButton.addActionListener(e -> dispose());
+        fileButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                //TODO: complete implementation with db save
+                System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
+            }
+        });
     }
 
     private void insertVolunteer() {
@@ -215,6 +225,9 @@ public class VolunteerInsert extends JDialog {
         residenceLabel = new JLabel();
         residenceLabel.setText("Residenza");
         detailPanel.add(residenceLabel, cc.xy(1, 9));
+        fileButton = new JButton();
+        fileButton.setText("Scegli file - TEST");
+        detailPanel.add(fileButton, cc.xy(1, 13));
     }
 
     /**
