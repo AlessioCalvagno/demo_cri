@@ -6,12 +6,14 @@
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
+    <rowspec value="fill:d:noGrow"/>
+    <rowspec value="fill:max(d;4px):noGrow"/>
+    <rowspec value="fill:d:noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
+    <rowspec value="fill:d:noGrow"/>
+    <rowspec value="fill:d:noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
-    <rowspec value="fill:14px:noGrow"/>
-    <rowspec value="fill:max(d;4px):noGrow"/>
-    <rowspec value="fill:34px:noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
     <rowspec value="fill:max(d;4px):noGrow"/>
@@ -23,7 +25,7 @@
     <colspec value="fill:d:grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="30" y="20" width="517" height="496"/>
+      <xy x="30" y="20" width="428" height="483"/>
     </constraints>
     <properties>
       <alignmentX value="0.5"/>
@@ -117,7 +119,7 @@
           <text value="Luogo di nascita"/>
         </properties>
       </component>
-      <component id="e6ffd" class="javax.swing.JTextField" binding="phoneField">
+      <component id="e6ffd" class="javax.swing.JTextField" binding="pecField">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -141,13 +143,13 @@
           <preferredSize width="100" height="30"/>
         </properties>
       </component>
-      <component id="80939" class="javax.swing.JLabel" binding="phoneLabel">
+      <component id="80939" class="javax.swing.JLabel" binding="pecLabel">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
-          <text value="Cellulare"/>
+          <text value="PEC"/>
         </properties>
       </component>
       <component id="8c30e" class="javax.swing.JLabel" binding="emailLabel">
@@ -159,7 +161,7 @@
           <text value="e-mail"/>
         </properties>
       </component>
-      <component id="35307" class="javax.swing.JTextField" binding="residenceField">
+      <component id="35307" class="javax.swing.JTextField" binding="phoneField">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -171,93 +173,30 @@
           <preferredSize width="100" height="30"/>
         </properties>
       </component>
-      <component id="d3959" class="javax.swing.JLabel" binding="residenceLabel">
+      <component id="d3959" class="javax.swing.JLabel" binding="phoneLabel">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <text value="Residenza"/>
+          <text value="Cellulare"/>
         </properties>
       </component>
       <component id="11d50" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="3e5cf" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="3ced" class="javax.swing.JTextField" binding="registrationNumberField">
-        <constraints>
-          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <preferredSize width="100" height="30"/>
-        </properties>
-      </component>
-      <component id="42a81" class="javax.swing.JLabel" binding="registrationNumberLabel">
-        <constraints>
-          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Num. Matricola"/>
-        </properties>
-      </component>
       <component id="d72f2" class="javax.swing.JTextField" binding="feeField">
-        <constraints>
-          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <preferredSize width="100" height="30"/>
-        </properties>
-      </component>
-      <component id="d6c14" class="javax.swing.JLabel" binding="feeLabel">
-        <constraints>
-          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Quota ass."/>
-        </properties>
-      </component>
-      <component id="fa62f" class="javax.swing.JTextField" binding="rankField">
-        <constraints>
-          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <preferredSize width="100" height="30"/>
-        </properties>
-      </component>
-      <component id="ae4b1" class="javax.swing.JLabel" binding="rankLabel">
-        <constraints>
-          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="Grado"/>
-        </properties>
-      </component>
-      <component id="4fe26" class="javax.swing.JFormattedTextField" binding="lastRecallField" custom-create="true">
         <constraints>
           <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -269,9 +208,51 @@
           <preferredSize width="100" height="30"/>
         </properties>
       </component>
-      <component id="581f2" class="javax.swing.JLabel" binding="lastRecallLabel">
+      <component id="d6c14" class="javax.swing.JLabel" binding="feeLabel">
         <constraints>
           <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="Quota ass."/>
+        </properties>
+      </component>
+      <component id="fa62f" class="javax.swing.JTextField" binding="rankField">
+        <constraints>
+          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <preferredSize width="100" height="30"/>
+        </properties>
+      </component>
+      <component id="ae4b1" class="javax.swing.JLabel" binding="rankLabel">
+        <constraints>
+          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Grado"/>
+        </properties>
+      </component>
+      <component id="4fe26" class="javax.swing.JFormattedTextField" binding="lastRecallField" custom-create="true">
+        <constraints>
+          <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <preferredSize width="100" height="30"/>
+        </properties>
+      </component>
+      <component id="581f2" class="javax.swing.JLabel" binding="lastRecallLabel">
+        <constraints>
+          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -279,27 +260,6 @@
         </properties>
       </component>
       <component id="42477" class="javax.swing.JTextField" binding="activityField">
-        <constraints>
-          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <preferredSize width="100" height="30"/>
-        </properties>
-      </component>
-      <component id="ea2e1" class="javax.swing.JLabel" binding="activityLabel">
-        <constraints>
-          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <text value="Attività"/>
-        </properties>
-      </component>
-      <component id="78b0f" class="javax.swing.JFormattedTextField" binding="lastVisitField" custom-create="true">
         <constraints>
           <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -311,9 +271,30 @@
           <preferredSize width="100" height="30"/>
         </properties>
       </component>
-      <component id="cf579" class="javax.swing.JLabel" binding="lastVisitLabel">
+      <component id="ea2e1" class="javax.swing.JLabel" binding="activityLabel">
         <constraints>
           <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Attività"/>
+        </properties>
+      </component>
+      <component id="78b0f" class="javax.swing.JFormattedTextField" binding="lastVisitField" custom-create="true">
+        <constraints>
+          <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <preferredSize width="100" height="30"/>
+        </properties>
+      </component>
+      <component id="cf579" class="javax.swing.JLabel" binding="lastVisitLabel">
+        <constraints>
+          <grid row="17" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -322,7 +303,7 @@
       </component>
       <component id="67cbf" class="javax.swing.JFormattedTextField" binding="nextVisitField" custom-create="true">
         <constraints>
-          <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -334,7 +315,7 @@
       </component>
       <component id="3feeb" class="javax.swing.JLabel" binding="nextVisitLabel">
         <constraints>
-          <grid row="15" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -343,7 +324,7 @@
       </component>
       <component id="76061" class="javax.swing.JButton" binding="deleteButton">
         <constraints>
-          <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -352,7 +333,7 @@
       </component>
       <component id="9748f" class="javax.swing.JButton" binding="updateButton">
         <constraints>
-          <grid row="17" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="19" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -361,7 +342,7 @@
       </component>
       <component id="3af11" class="javax.swing.JButton" binding="cancelUpdateButton">
         <constraints>
-          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -371,12 +352,54 @@
       </component>
       <component id="ba5d7" class="javax.swing.JButton" binding="saveUpdateButton">
         <constraints>
-          <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
           <text value="Salva"/>
           <visible value="false"/>
+        </properties>
+      </component>
+      <component id="3ced" class="javax.swing.JTextField" binding="registrationNumberField">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <preferredSize width="100" height="30"/>
+        </properties>
+      </component>
+      <component id="42a81" class="javax.swing.JLabel" binding="registrationNumberLabel">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="Num. Matricola"/>
+        </properties>
+      </component>
+      <component id="8f01b" class="javax.swing.JTextField" binding="residenceField">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <preferredSize width="100" height="30"/>
+        </properties>
+      </component>
+      <component id="3f962" class="javax.swing.JLabel" binding="residenceLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="Residenza"/>
         </properties>
       </component>
     </children>
