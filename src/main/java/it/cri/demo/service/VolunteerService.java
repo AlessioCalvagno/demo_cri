@@ -9,26 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VolunteerService {
+public class VolunteerService extends AbstractService<Volunteer> {
 
-    @Autowired
-    private VolunteerRepository repository;
-
-    public List<Volunteer> getAll() {
-        return repository.findAll();
-    }
-
-    public Volunteer getById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @Transactional
-    public Volunteer save(Volunteer obj) {
-        return repository.save(obj);
-    }
-
-    @Transactional
-    public void delete(Volunteer volunteer) {
-        repository.delete(volunteer);
-    }
 }
