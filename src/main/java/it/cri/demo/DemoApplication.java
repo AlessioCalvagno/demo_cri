@@ -1,8 +1,10 @@
 package it.cri.demo;
 
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.MedicalVisitService;
 import it.cri.demo.service.VolunteerService;
 import it.cri.demo.ui.FormTest;
+import it.cri.demo.ui.MedicalVisitUI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -26,6 +28,9 @@ public class DemoApplication {
 		System.setProperty("java.awt.headless","false");
 
 		SwingUtilities.invokeLater(() -> new FormTest(service).setVisible(true));
+        //for debugging new UI for tables:
+//        MedicalVisitService medicalVisitService = ctx.getBean(MedicalVisitService.class);
+//        SwingUtilities.invokeLater(() -> new MedicalVisitUI(medicalVisitService).setVisible(true));
 	}
 
 }
