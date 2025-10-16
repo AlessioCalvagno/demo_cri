@@ -48,6 +48,12 @@ public class FormTest extends JFrame {
 
         insertButton.addActionListener(e -> showInsertDialog());
         refreshButton.addActionListener(e -> updateListWiew());
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception ignored) {
+        }
     }
 
     private void showInsertDialog() {
