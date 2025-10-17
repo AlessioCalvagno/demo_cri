@@ -2,28 +2,24 @@ package it.cri.demo.ui;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import it.cri.demo.controller.MedicalVisitTableModel;
-import it.cri.demo.entity.MedicalVisit;
-import it.cri.demo.service.MedicalVisitService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import it.cri.demo.controller.BrevetTableModel;
+import it.cri.demo.entity.Brevet;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-
-public class MedicalVisitUI extends JDialog {
+public class BrevetUI extends JDialog {
     private JPanel mainPanel;
     private JTable table1;
     private JScrollPane scrollPane;
     private JLabel label;
 
-    private final List<MedicalVisit> medicalVisitList;
+    private final List<Brevet> brevetList;
 
-    public MedicalVisitUI(Frame owner, List<MedicalVisit> medicalVisitList) throws HeadlessException {
-        super(owner, "Medical visit", true);
-        this.medicalVisitList = medicalVisitList;
+    public BrevetUI(Frame owner, List<Brevet> brevetList) {
+        super(owner, "Brevetti", true);
+        this.brevetList = brevetList;
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
@@ -40,14 +36,14 @@ public class MedicalVisitUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("center:d:grow", "center:18px:noGrow,center:d:grow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,center:d:noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
         mainPanel.add(scrollPane, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.FILL));
         scrollPane.setViewportView(table1);
         label = new JLabel();
-        label.setText("Visite mediche");
-        mainPanel.add(label, cc.xy(1, 1));
+        label.setText("Brevetti");
+        mainPanel.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
 
     /**
@@ -59,6 +55,6 @@ public class MedicalVisitUI extends JDialog {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        table1 = new JTable(new MedicalVisitTableModel(this.medicalVisitList));
+        table1 = new JTable(new BrevetTableModel(this.brevetList));
     }
 }

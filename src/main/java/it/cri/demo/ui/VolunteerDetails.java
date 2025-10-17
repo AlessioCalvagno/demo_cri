@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -49,6 +51,12 @@ public class VolunteerDetails extends JDialog {
     private JLabel residenceLabel;
     private JLabel pecLabel;
     private JTextField pecField;
+    private JButton visiteMedicheButton;
+    private JButton associativeFeeButton;
+    private JButton brevetButton;
+    private JButton recallButton;
+    private JButton qualificationButton;
+    private JButton promotionButton;
     private Volunteer volunteer;
     private final VolunteerService service;
 
@@ -79,6 +87,37 @@ public class VolunteerDetails extends JDialog {
                 dispose();
             }
         });
+        visiteMedicheButton.addActionListener(e -> openMedicalVisitUI());
+        associativeFeeButton.addActionListener(e -> openAssociativeFeeUI());
+        brevetButton.addActionListener(e -> openBrevetUI());
+        recallButton.addActionListener(e -> openRecallUI());
+        qualificationButton.addActionListener(e -> openQualificationUI());
+        promotionButton.addActionListener(e -> openPromotionUI());
+    }
+
+
+    private void openMedicalVisitUI() {
+        new MedicalVisitUI(null, volunteer.getMedicalVisits()).setVisible(true);
+    }
+
+    private void openAssociativeFeeUI() {
+        new AssociativeFeeUI(null, volunteer.getAssociativeFees()).setVisible(true);
+    }
+
+    private void openBrevetUI() {
+        new BrevetUI(null, volunteer.getBrevets()).setVisible(true);
+    }
+
+    private void openRecallUI() {
+        new RecallUI(null, volunteer.getRecalls()).setVisible(true);
+    }
+
+    private void openQualificationUI() {
+        new QualificationUI(null, volunteer.getQualifications()).setVisible(true);
+    }
+
+    private void openPromotionUI() {
+        new PromotionUI(null, volunteer.getPromotions()).setVisible(true);
     }
 
     private void updateVolunteer() {
@@ -172,7 +211,7 @@ public class VolunteerDetails extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         detailPanel = new JPanel();
-        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow"));
+        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:33px:noGrow,fill:33px:noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow"));
         detailPanel.setAlignmentX(0.5f);
         detailPanel.setAlignmentY(0.5f);
         detailPanel.setAutoscrolls(true);
@@ -272,18 +311,18 @@ public class VolunteerDetails extends JDialog {
         detailPanel.add(nextVisitLabel, cc.xy(2, 18));
         deleteButton = new JButton();
         deleteButton.setText("Elimina record");
-        detailPanel.add(deleteButton, cc.xy(2, 20));
+        detailPanel.add(deleteButton, cc.xy(2, 27));
         updateButton = new JButton();
         updateButton.setText("Modifica");
-        detailPanel.add(updateButton, cc.xy(1, 20));
+        detailPanel.add(updateButton, cc.xy(1, 27));
         cancelUpdateButton = new JButton();
         cancelUpdateButton.setText("Annulla");
         cancelUpdateButton.setVisible(false);
-        detailPanel.add(cancelUpdateButton, cc.xy(2, 21));
+        detailPanel.add(cancelUpdateButton, cc.xy(2, 28));
         saveUpdateButton = new JButton();
         saveUpdateButton.setText("Salva");
         saveUpdateButton.setVisible(false);
-        detailPanel.add(saveUpdateButton, cc.xy(1, 21));
+        detailPanel.add(saveUpdateButton, cc.xy(1, 28));
         registrationNumberField = new JTextField();
         registrationNumberField.setEditable(false);
         registrationNumberField.setPreferredSize(new Dimension(100, 30));
@@ -298,6 +337,24 @@ public class VolunteerDetails extends JDialog {
         residenceLabel = new JLabel();
         residenceLabel.setText("Residenza");
         detailPanel.add(residenceLabel, cc.xy(1, 9, CellConstraints.LEFT, CellConstraints.DEFAULT));
+        visiteMedicheButton = new JButton();
+        visiteMedicheButton.setText("Visite mediche");
+        detailPanel.add(visiteMedicheButton, cc.xy(1, 20));
+        associativeFeeButton = new JButton();
+        associativeFeeButton.setText("Quota associativa");
+        detailPanel.add(associativeFeeButton, cc.xy(1, 21));
+        brevetButton = new JButton();
+        brevetButton.setText("Brevetti");
+        detailPanel.add(brevetButton, cc.xy(1, 22));
+        recallButton = new JButton();
+        recallButton.setText("Richiami");
+        detailPanel.add(recallButton, cc.xy(1, 23));
+        qualificationButton = new JButton();
+        qualificationButton.setText("Qualifiche");
+        detailPanel.add(qualificationButton, cc.xy(1, 24));
+        promotionButton = new JButton();
+        promotionButton.setText("Promozioni");
+        detailPanel.add(promotionButton, cc.xy(1, 25));
     }
 
     /**
