@@ -43,6 +43,7 @@ public class VolunteerDetails extends JDialog {
     private JButton recallButton;
     private JButton qualificationButton;
     private JButton promotionButton;
+    private JSeparator bottomSeparator;
     private Volunteer volunteer;
     private final VolunteerService service;
 
@@ -55,6 +56,7 @@ public class VolunteerDetails extends JDialog {
         setContentPane(detailPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 500);
+//        pack();
         setTitle("Dettagli arruolato");
         setVisible(true);
         updateButton.addActionListener(e -> enableFormEdit());
@@ -173,7 +175,7 @@ public class VolunteerDetails extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         detailPanel = new JPanel();
-        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:33px:noGrow,fill:33px:noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow"));
+        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:34px:noGrow,fill:d:noGrow,fill:d:noGrow,fill:d:noGrow,fill:d:noGrow,fill:d:grow,center:max(d;4px):noGrow,fill:d:noGrow"));
         detailPanel.setAlignmentX(0.5f);
         detailPanel.setAlignmentY(0.5f);
         detailPanel.setAutoscrolls(true);
@@ -233,19 +235,13 @@ public class VolunteerDetails extends JDialog {
         final JSeparator separator2 = new JSeparator();
         detailPanel.add(separator2, cc.xy(2, 11, CellConstraints.FILL, CellConstraints.FILL));
         deleteButton = new JButton();
+        deleteButton.setPreferredSize(new Dimension(100, 30));
         deleteButton.setText("Elimina record");
-        detailPanel.add(deleteButton, cc.xy(2, 19));
+        detailPanel.add(deleteButton, cc.xy(2, 17));
         updateButton = new JButton();
+        updateButton.setPreferredSize(new Dimension(100, 30));
         updateButton.setText("Modifica");
-        detailPanel.add(updateButton, cc.xy(1, 19));
-        cancelUpdateButton = new JButton();
-        cancelUpdateButton.setText("Annulla");
-        cancelUpdateButton.setVisible(false);
-        detailPanel.add(cancelUpdateButton, cc.xy(2, 20));
-        saveUpdateButton = new JButton();
-        saveUpdateButton.setText("Salva");
-        saveUpdateButton.setVisible(false);
-        detailPanel.add(saveUpdateButton, cc.xy(1, 20));
+        detailPanel.add(updateButton, cc.xy(1, 17));
         registrationNumberField = new JTextField();
         registrationNumberField.setEditable(false);
         registrationNumberField.setPreferredSize(new Dimension(100, 30));
@@ -255,29 +251,44 @@ public class VolunteerDetails extends JDialog {
         detailPanel.add(registrationNumberLabel, cc.xy(2, 7, CellConstraints.LEFT, CellConstraints.DEFAULT));
         residenceField = new JTextField();
         residenceField.setEditable(false);
-        residenceField.setPreferredSize(new Dimension(100, 30));
+        residenceField.setPreferredSize(new Dimension(200, 30));
         detailPanel.add(residenceField, cc.xyw(1, 10, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
         residenceLabel = new JLabel();
         residenceLabel.setText("Residenza");
         detailPanel.add(residenceLabel, cc.xy(1, 9, CellConstraints.LEFT, CellConstraints.DEFAULT));
-        visiteMedicheButton = new JButton();
-        visiteMedicheButton.setText("Visite mediche");
-        detailPanel.add(visiteMedicheButton, cc.xy(1, 12));
-        associativeFeeButton = new JButton();
-        associativeFeeButton.setText("Quota associativa");
-        detailPanel.add(associativeFeeButton, cc.xy(1, 13));
-        brevetButton = new JButton();
-        brevetButton.setText("Brevetti");
-        detailPanel.add(brevetButton, cc.xy(1, 14));
-        recallButton = new JButton();
-        recallButton.setText("Richiami");
-        detailPanel.add(recallButton, cc.xy(1, 15));
         qualificationButton = new JButton();
+        qualificationButton.setPreferredSize(new Dimension(100, 30));
         qualificationButton.setText("Qualifiche");
-        detailPanel.add(qualificationButton, cc.xy(1, 16));
+        detailPanel.add(qualificationButton, cc.xy(1, 14));
+        visiteMedicheButton = new JButton();
+        visiteMedicheButton.setPreferredSize(new Dimension(100, 30));
+        visiteMedicheButton.setText("Visite mediche");
+        detailPanel.add(visiteMedicheButton, cc.xy(2, 12));
+        associativeFeeButton = new JButton();
+        associativeFeeButton.setPreferredSize(new Dimension(100, 30));
+        associativeFeeButton.setText("Quota associativa");
+        detailPanel.add(associativeFeeButton, cc.xy(1, 12));
+        recallButton = new JButton();
+        recallButton.setPreferredSize(new Dimension(100, 30));
+        recallButton.setText("Richiami");
+        detailPanel.add(recallButton, cc.xy(1, 13));
+        brevetButton = new JButton();
+        brevetButton.setPreferredSize(new Dimension(100, 30));
+        brevetButton.setText("Brevetti");
+        detailPanel.add(brevetButton, cc.xy(2, 14));
         promotionButton = new JButton();
+        promotionButton.setPreferredSize(new Dimension(100, 30));
         promotionButton.setText("Promozioni");
-        detailPanel.add(promotionButton, cc.xy(1, 17));
+        detailPanel.add(promotionButton, cc.xy(2, 13));
+        bottomSeparator = new JSeparator();
+        bottomSeparator.setPreferredSize(new Dimension(200, 30));
+        detailPanel.add(bottomSeparator, cc.xyw(1, 15, 2, CellConstraints.FILL, CellConstraints.FILL));
+        saveUpdateButton.setPreferredSize(new Dimension(100, 30));
+        saveUpdateButton.setText("Conferma");
+        detailPanel.add(saveUpdateButton, cc.xy(1, 16));
+        cancelUpdateButton.setPreferredSize(new Dimension(100, 30));
+        cancelUpdateButton.setText("Annulla");
+        detailPanel.add(cancelUpdateButton, cc.xy(2, 16));
     }
 
     /**
@@ -289,6 +300,12 @@ public class VolunteerDetails extends JDialog {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        cancelUpdateButton = new JButton();
+        cancelUpdateButton.setVisible(false);
+
+        saveUpdateButton = new JButton();
+        saveUpdateButton.setVisible(false);
+
         MaskFormatter dateFormatter = null;
         try {
             dateFormatter = new MaskFormatter("##/##/####");
