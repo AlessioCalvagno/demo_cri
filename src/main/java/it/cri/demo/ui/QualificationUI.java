@@ -4,9 +4,14 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.QualificationTableModel;
 import it.cri.demo.entity.Qualification;
+import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
+import it.cri.demo.ui.dialogs.QualificationForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class QualificationUI extends JDialog {
@@ -14,15 +19,17 @@ public class QualificationUI extends JDialog {
     private JTable table1;
     private JLabel label;
     private JScrollPane scrollPane;
+    private JButton insertButton;
     private final List<Qualification> qualificationList;
 
-    public QualificationUI(Frame owner, List<Qualification> qualificationList) {
+    public QualificationUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
         super(owner, "Qualifiche", true);
-        this.qualificationList = qualificationList;
+        this.qualificationList = volunteer.getQualifications();
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        setVisible(true);
+//        setVisible(true);
+        insertButton.addActionListener(e -> new QualificationForm(null,volunteer, volunteerService).setVisible(true));
     }
 
     /**
@@ -35,7 +42,7 @@ public class QualificationUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:19px:noGrow,center:d:noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:19px:noGrow,center:d:noGrow,center:max(d;4px):noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
         mainPanel.add(scrollPane, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.FILL));
@@ -43,6 +50,9 @@ public class QualificationUI extends JDialog {
         label = new JLabel();
         label.setText("Qualifiche");
         mainPanel.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuova qualifica");
+        mainPanel.add(insertButton, cc.xy(1, 3));
     }
 
     /**

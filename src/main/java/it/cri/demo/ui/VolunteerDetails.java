@@ -58,7 +58,7 @@ public class VolunteerDetails extends JDialog {
         setSize(800, 500);
 //        pack();
         setTitle("Dettagli arruolato");
-        setVisible(true);
+//        setVisible(true);
         updateButton.addActionListener(e -> enableFormEdit());
         cancelUpdateButton.addActionListener(e -> disableFormEdit());
         saveUpdateButton.addActionListener(e -> {
@@ -101,7 +101,7 @@ public class VolunteerDetails extends JDialog {
     }
 
     private void openQualificationUI() {
-        new QualificationUI(null, volunteer.getQualifications()).setVisible(true);
+        new QualificationUI(null, volunteer, service).setVisible(true);
     }
 
     private void openPromotionUI() {
