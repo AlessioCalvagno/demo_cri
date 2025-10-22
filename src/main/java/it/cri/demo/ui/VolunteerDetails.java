@@ -56,9 +56,7 @@ public class VolunteerDetails extends JDialog {
         setContentPane(detailPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 500);
-//        pack();
         setTitle("Dettagli arruolato");
-//        setVisible(true);
         updateButton.addActionListener(e -> enableFormEdit());
         cancelUpdateButton.addActionListener(e -> disableFormEdit());
         saveUpdateButton.addActionListener(e -> {

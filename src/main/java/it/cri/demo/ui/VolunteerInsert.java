@@ -9,8 +9,6 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +59,6 @@ public class VolunteerInsert extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 500);
         setTitle("Nuovo arruolato");
-        setVisible(true);
         this.service = service;
 
         saveButton.addActionListener(e -> {

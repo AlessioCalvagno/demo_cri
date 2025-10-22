@@ -28,7 +28,6 @@ public class QualificationUI extends JDialog {
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-//        setVisible(true);
         insertButton.addActionListener(e -> new QualificationForm(null, volunteer, volunteerService).setVisible(true));
     }
 

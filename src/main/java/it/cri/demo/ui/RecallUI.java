@@ -29,7 +29,6 @@ public class RecallUI extends JDialog {
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-//        setVisible(true);
         insertButton.addActionListener(e -> new RecallForm(null, volunteer, volunteerService).setVisible(true));
     }
 

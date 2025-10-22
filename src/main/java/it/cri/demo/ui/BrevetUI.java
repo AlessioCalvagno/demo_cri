@@ -29,7 +29,6 @@ public class BrevetUI extends JDialog {
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-//        setVisible(true);
         insertButton.addActionListener(e -> new BrevetForm(null, volunteer, volunteerService).setVisible(true));
     }
 

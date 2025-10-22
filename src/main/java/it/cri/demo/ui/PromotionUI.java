@@ -29,7 +29,6 @@ public class PromotionUI extends JDialog {
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-//        setVisible(true);
         insertButton.addActionListener(e -> new PromotionForm(null, volunteer, volunteerService).setVisible(true));
     }
 

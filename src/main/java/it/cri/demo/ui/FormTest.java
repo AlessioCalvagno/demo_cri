@@ -29,7 +29,6 @@ public class FormTest extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("GUI Test");
         setSize(800, 500);
-        setVisible(true);
 
         listModel = new DefaultListModel<>();
         list1.setModel(listModel);
@@ -57,7 +56,7 @@ public class FormTest extends JFrame {
     }
 
     private void showInsertDialog() {
-        new VolunteerInsert(this, service);
+        new VolunteerInsert(this, service).setVisible(true);
     }
 
     private void updateListWiew() {

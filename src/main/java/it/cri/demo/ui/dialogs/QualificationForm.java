@@ -26,7 +26,6 @@ public class QualificationForm extends JDialog {
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        setVisible(true);
         this.volunteer = volunteer;
         this.volunteerService = volunteerService;
 
