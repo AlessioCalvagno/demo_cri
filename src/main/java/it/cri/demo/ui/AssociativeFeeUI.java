@@ -4,6 +4,8 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.AssociativeFeeTableModel;
 import it.cri.demo.entity.AssociativeFee;
+import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +19,13 @@ public class AssociativeFeeUI extends JDialog {
 
     private final List<AssociativeFee> associativeFeeList;
 
-    public AssociativeFeeUI(Frame owner, List<AssociativeFee> associativeFeeList) {
+    public AssociativeFeeUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
         super(owner, "Quote associative", true);
-        this.associativeFeeList = associativeFeeList;
+        this.associativeFeeList = volunteer.getAssociativeFees();
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        setVisible(true);
+//        setVisible(true);
     }
 
     /**

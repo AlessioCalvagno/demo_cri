@@ -85,19 +85,19 @@ public class VolunteerDetails extends JDialog {
 
 
     private void openMedicalVisitUI() {
-        new MedicalVisitUI(null, volunteer.getMedicalVisits()).setVisible(true);
+        new MedicalVisitUI(null, volunteer, service).setVisible(true);
     }
 
     private void openAssociativeFeeUI() {
-        new AssociativeFeeUI(null, volunteer.getAssociativeFees()).setVisible(true);
+        new AssociativeFeeUI(null, volunteer, service).setVisible(true);
     }
 
     private void openBrevetUI() {
-        new BrevetUI(null, volunteer.getBrevets()).setVisible(true);
+        new BrevetUI(null, volunteer, service).setVisible(true);
     }
 
     private void openRecallUI() {
-        new RecallUI(null, volunteer.getRecalls()).setVisible(true);
+        new RecallUI(null, volunteer, service).setVisible(true);
     }
 
     private void openQualificationUI() {
@@ -105,7 +105,7 @@ public class VolunteerDetails extends JDialog {
     }
 
     private void openPromotionUI() {
-        new PromotionUI(null, volunteer.getPromotions()).setVisible(true);
+        new PromotionUI(null, volunteer, service).setVisible(true);
     }
 
     private void updateVolunteer() {

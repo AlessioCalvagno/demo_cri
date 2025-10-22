@@ -4,6 +4,8 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.RecallTableModel;
 import it.cri.demo.entity.Recall;
+import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +19,13 @@ public class RecallUI extends JDialog {
 
     private final List<Recall> recallList;
 
-    public RecallUI(Frame owner, List<Recall> recallList) {
+    public RecallUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
         super(owner, "Richiami", true);
-        this.recallList = recallList;
+        this.recallList = volunteer.getRecalls();
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        setVisible(true);
+//        setVisible(true);
     }
 
     /**

@@ -4,7 +4,9 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.MedicalVisitTableModel;
 import it.cri.demo.entity.MedicalVisit;
+import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.MedicalVisitService;
+import it.cri.demo.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +23,13 @@ public class MedicalVisitUI extends JDialog {
 
     private final List<MedicalVisit> medicalVisitList;
 
-    public MedicalVisitUI(Frame owner, List<MedicalVisit> medicalVisitList) throws HeadlessException {
+    public MedicalVisitUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) throws HeadlessException {
         super(owner, "Medical visit", true);
-        this.medicalVisitList = medicalVisitList;
+        this.medicalVisitList = volunteer.getMedicalVisits();
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        setVisible(true);
+//        setVisible(true);
     }
 
     /**

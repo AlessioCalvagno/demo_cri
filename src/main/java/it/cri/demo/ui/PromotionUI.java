@@ -4,6 +4,8 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.PromotionTableModel;
 import it.cri.demo.entity.Promotion;
+import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +19,13 @@ public class PromotionUI extends JDialog {
 
     private final List<Promotion> promotionList;
 
-    public PromotionUI(Frame owner, List<Promotion> promotionList) {
+    public PromotionUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
         super(owner, "Promozioni e gradi", true);
-        this.promotionList = promotionList;
+        this.promotionList = volunteer.getPromotions();
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        setVisible(true);
+//        setVisible(true);
     }
 
     /**

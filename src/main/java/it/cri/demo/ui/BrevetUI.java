@@ -4,6 +4,8 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.BrevetTableModel;
 import it.cri.demo.entity.Brevet;
+import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +19,13 @@ public class BrevetUI extends JDialog {
 
     private final List<Brevet> brevetList;
 
-    public BrevetUI(Frame owner, List<Brevet> brevetList) {
+    public BrevetUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
         super(owner, "Brevetti", true);
-        this.brevetList = brevetList;
+        this.brevetList = volunteer.getBrevets();
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        setVisible(true);
+//        setVisible(true);
     }
 
     /**
