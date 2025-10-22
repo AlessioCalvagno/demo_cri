@@ -6,9 +6,12 @@ import it.cri.demo.controller.AssociativeFeeTableModel;
 import it.cri.demo.entity.AssociativeFee;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.VolunteerService;
+import it.cri.demo.ui.dialogs.AssociativeFeeForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AssociativeFeeUI extends JDialog {
@@ -16,6 +19,7 @@ public class AssociativeFeeUI extends JDialog {
     private JTable table1;
     private JLabel label;
     private JScrollPane scrollPane;
+    private JButton insertButton;
 
     private final List<AssociativeFee> associativeFeeList;
 
@@ -26,6 +30,7 @@ public class AssociativeFeeUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
 //        setVisible(true);
+        insertButton.addActionListener(e -> new AssociativeFeeForm(null, volunteer, volunteerService).setVisible(true));
     }
 
     /**
@@ -38,7 +43,7 @@ public class AssociativeFeeUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:17px:noGrow,center:d:noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,center:max(d;100px):grow,center:max(d;4px):noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
         mainPanel.add(scrollPane, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.FILL));
@@ -46,6 +51,9 @@ public class AssociativeFeeUI extends JDialog {
         label = new JLabel();
         label.setText("Quote associative");
         mainPanel.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuova quota associativa");
+        mainPanel.add(insertButton, cc.xy(1, 3));
     }
 
     /**

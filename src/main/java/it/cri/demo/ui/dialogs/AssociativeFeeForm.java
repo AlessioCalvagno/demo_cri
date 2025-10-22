@@ -2,50 +2,52 @@ package it.cri.demo.ui.dialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import it.cri.demo.entity.Qualification;
+import it.cri.demo.entity.AssociativeFee;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class QualificationForm extends JDialog {
-    private JTextField typeField;
+public class AssociativeFeeForm extends JDialog {
+    private JTextField yearField;
     private JPanel mainPanel;
-    private JLabel typeLabel;
     private JTextField committeeField;
-    private JLabel committeeLabel;
     private JButton insertButton;
     private JButton cancelButton;
+    private JLabel yearLabel;
+    private JLabel committeeLabel;
+    private JSeparator separator;
 
     private Volunteer volunteer;
     private VolunteerService volunteerService;
 
-    public QualificationForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
-        super(owner, "Inserisci qualifica", true);
+    public AssociativeFeeForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+        super(owner, "Inserisci quota associativa", true);
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        setVisible(true);
+
         this.volunteer = volunteer;
         this.volunteerService = volunteerService;
-
-
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
+
     }
 
     private void confirmSave() {
-        String type = typeField.getText();
+        int year = Integer.parseInt(yearField.getText());
         String committee = committeeField.getText();
 
-        Qualification q = new Qualification();
-        q.setType(type);
-        q.setCommittee(committee);
-        q.setVolunteer(this.volunteer);
+        AssociativeFee a = new AssociativeFee();
+        a.setYear(year);
+        a.setCommittee(committee);
+        a.setVolunteer(this.volunteer);
 
-        this.volunteer.getQualifications().add(q);
-        this.volunteerService.save(volunteer); //be careful to N+1 problem
+        this.volunteer.getAssociativeFees().add(a);
+        this.volunteerService.save(volunteer);
     }
 
     {
@@ -64,30 +66,33 @@ public class QualificationForm extends JDialog {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:max(d;4px):grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:d:noGrow,fill:max(d;4px):noGrow,center:d:noGrow,center:d:grow,center:max(d;4px):noGrow"));
-        typeField = new JTextField();
-        typeField.setPreferredSize(new Dimension(160, 30));
-        typeField.setText("");
+        mainPanel.setLayout(new FormLayout("fill:d:grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:d:grow,center:max(d;4px):noGrow"));
+        yearField = new JTextField();
+        yearField.setPreferredSize(new Dimension(160, 30));
         CellConstraints cc = new CellConstraints();
-        mainPanel.add(typeField, cc.xyw(1, 2, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
-        typeLabel = new JLabel();
-        typeLabel.setPreferredSize(new Dimension(160, 17));
-        typeLabel.setText("Tipo");
-        mainPanel.add(typeLabel, cc.xyw(1, 1, 2));
+        mainPanel.add(yearField, cc.xyw(1, 2, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
+        yearLabel = new JLabel();
+        yearLabel.setPreferredSize(new Dimension(160, 17));
+        yearLabel.setText("Anno");
+        mainPanel.add(yearLabel, cc.xyw(1, 1, 2));
         committeeField = new JTextField();
-        committeeField.setPreferredSize(new Dimension(160, 30));
+        committeeField.setMinimumSize(new Dimension(160, 30));
         mainPanel.add(committeeField, cc.xyw(1, 4, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
         committeeLabel = new JLabel();
         committeeLabel.setPreferredSize(new Dimension(160, 17));
         committeeLabel.setText("Comitato");
         mainPanel.add(committeeLabel, cc.xyw(1, 3, 2));
-        final JSeparator separator1 = new JSeparator();
-        mainPanel.add(separator1, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
+        separator = new JSeparator();
+        mainPanel.add(separator, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
         insertButton = new JButton();
+        insertButton.setMaximumSize(new Dimension(85, 30));
+        insertButton.setMinimumSize(new Dimension(70, 30));
         insertButton.setPreferredSize(new Dimension(80, 30));
         insertButton.setText("Inserisci");
         mainPanel.add(insertButton, cc.xy(1, 6));
         cancelButton = new JButton();
+        cancelButton.setMaximumSize(new Dimension(85, 30));
+        cancelButton.setMinimumSize(new Dimension(70, 30));
         cancelButton.setPreferredSize(new Dimension(80, 30));
         cancelButton.setText("Annulla");
         mainPanel.add(cancelButton, cc.xy(2, 6));

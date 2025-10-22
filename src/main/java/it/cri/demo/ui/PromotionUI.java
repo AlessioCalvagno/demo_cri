@@ -6,9 +6,12 @@ import it.cri.demo.controller.PromotionTableModel;
 import it.cri.demo.entity.Promotion;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.VolunteerService;
+import it.cri.demo.ui.dialogs.PromotionForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PromotionUI extends JDialog {
@@ -16,6 +19,7 @@ public class PromotionUI extends JDialog {
     private JScrollPane scrollPane;
     private JTable table1;
     private JLabel label;
+    private JButton insertButton;
 
     private final List<Promotion> promotionList;
 
@@ -26,6 +30,7 @@ public class PromotionUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
 //        setVisible(true);
+        insertButton.addActionListener(e -> new PromotionForm(null, volunteer, volunteerService).setVisible(true));
     }
 
     /**
@@ -38,14 +43,17 @@ public class PromotionUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,center:max(d;100px):grow,center:max(d;4px):noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
-        mainPanel.add(scrollPane, cc.xy(1, 3, CellConstraints.FILL, CellConstraints.FILL));
+        mainPanel.add(scrollPane, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.FILL));
         scrollPane.setViewportView(table1);
         label = new JLabel();
         label.setText("Promozioni e gradi");
         mainPanel.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuova promozione");
+        mainPanel.add(insertButton, cc.xy(1, 3));
     }
 
     /**

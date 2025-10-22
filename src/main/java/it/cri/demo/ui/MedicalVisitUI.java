@@ -5,13 +5,13 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.MedicalVisitTableModel;
 import it.cri.demo.entity.MedicalVisit;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.MedicalVisitService;
 import it.cri.demo.service.VolunteerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import it.cri.demo.ui.dialogs.MedicalVisitForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 
@@ -20,6 +20,7 @@ public class MedicalVisitUI extends JDialog {
     private JTable table1;
     private JScrollPane scrollPane;
     private JLabel label;
+    private JButton insertButton;
 
     private final List<MedicalVisit> medicalVisitList;
 
@@ -30,6 +31,7 @@ public class MedicalVisitUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
 //        setVisible(true);
+        insertButton.addActionListener(e -> new MedicalVisitForm(null, volunteer, volunteerService).setVisible(true));
     }
 
     /**
@@ -42,7 +44,7 @@ public class MedicalVisitUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("center:d:grow", "center:18px:noGrow,center:d:grow"));
+        mainPanel.setLayout(new FormLayout("center:d:grow", "center:max(d;4px):noGrow,center:max(d;100px):grow,center:max(d;4px):noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
         mainPanel.add(scrollPane, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.FILL));
@@ -50,6 +52,9 @@ public class MedicalVisitUI extends JDialog {
         label = new JLabel();
         label.setText("Visite mediche");
         mainPanel.add(label, cc.xy(1, 1));
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuova visita medica");
+        mainPanel.add(insertButton, cc.xy(1, 3, CellConstraints.FILL, CellConstraints.DEFAULT));
     }
 
     /**

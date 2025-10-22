@@ -6,9 +6,12 @@ import it.cri.demo.controller.RecallTableModel;
 import it.cri.demo.entity.Recall;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.VolunteerService;
+import it.cri.demo.ui.dialogs.RecallForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class RecallUI extends JDialog {
@@ -16,6 +19,7 @@ public class RecallUI extends JDialog {
     private JTable table1;
     private JScrollPane scrollPane;
     private JLabel label;
+    private JButton insertButton;
 
     private final List<Recall> recallList;
 
@@ -26,6 +30,7 @@ public class RecallUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
 //        setVisible(true);
+        insertButton.addActionListener(e -> new RecallForm(null, volunteer, volunteerService).setVisible(true));
     }
 
     /**
@@ -38,7 +43,7 @@ public class RecallUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:max(d;4px):noGrow,center:d:noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:max(d;4px):noGrow,center:max(d;100px):grow,center:max(d;4px):noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
         mainPanel.add(scrollPane, cc.xyw(1, 2, 3, CellConstraints.FILL, CellConstraints.FILL));
@@ -46,6 +51,9 @@ public class RecallUI extends JDialog {
         label = new JLabel();
         label.setText("Richiami");
         mainPanel.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuovo richiamo");
+        mainPanel.add(insertButton, cc.xy(1, 3));
     }
 
     /**

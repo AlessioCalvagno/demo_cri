@@ -6,9 +6,12 @@ import it.cri.demo.controller.BrevetTableModel;
 import it.cri.demo.entity.Brevet;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.VolunteerService;
+import it.cri.demo.ui.dialogs.BrevetForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class BrevetUI extends JDialog {
@@ -16,6 +19,7 @@ public class BrevetUI extends JDialog {
     private JTable table1;
     private JScrollPane scrollPane;
     private JLabel label;
+    private JButton insertButton;
 
     private final List<Brevet> brevetList;
 
@@ -26,6 +30,7 @@ public class BrevetUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
 //        setVisible(true);
+        insertButton.addActionListener(e -> new BrevetForm(null, volunteer, volunteerService).setVisible(true));
     }
 
     /**
@@ -38,7 +43,7 @@ public class BrevetUI extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,center:d:noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,center:max(d;100px):grow,center:max(d;4px):noGrow"));
         scrollPane = new JScrollPane();
         CellConstraints cc = new CellConstraints();
         mainPanel.add(scrollPane, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.FILL));
@@ -46,6 +51,9 @@ public class BrevetUI extends JDialog {
         label = new JLabel();
         label.setText("Brevetti");
         mainPanel.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        insertButton = new JButton();
+        insertButton.setText("Inserisci nuovo brevetto");
+        mainPanel.add(insertButton, cc.xy(1, 3));
     }
 
     /**
