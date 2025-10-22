@@ -3,13 +3,11 @@ package it.cri.demo.ui;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,10 +18,30 @@ public class FormTest extends JFrame {
     private JScrollPane scrollPane;
     private JButton insertButton;
     private JButton refreshButton;
-    private final VolunteerService service;
 
-    public FormTest(VolunteerService service) throws HeadlessException {
-        this.service = service;
+    private final VolunteerService volunteerService;
+    private final AssociativeFeeService associativeFeeService;
+    private final BrevetService brevetService;
+    private final MedicalVisitService medicalVisitService;
+    private final PromotionService promotionService;
+    private final QualificationService qualificationService;
+    private final RecallService recallService;
+
+    public FormTest(VolunteerService volunteerService,
+                    AssociativeFeeService associativeFeeService,
+                    BrevetService brevetService,
+                    MedicalVisitService medicalVisitService,
+                    PromotionService promotionService,
+                    QualificationService qualificationService,
+                    RecallService recallService) throws HeadlessException {
+
+        this.volunteerService = volunteerService;
+        this.associativeFeeService = associativeFeeService;
+        this.brevetService = brevetService;
+        this.medicalVisitService = medicalVisitService;
+        this.promotionService = promotionService;
+        this.qualificationService = qualificationService;
+        this.recallService = recallService;
 
         setContentPane(panel1);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,16 +74,23 @@ public class FormTest extends JFrame {
     }
 
     private void showInsertDialog() {
-        new VolunteerInsert(this, service).setVisible(true);
+        new VolunteerInsert(this, volunteerService).setVisible(true);
     }
 
     private void updateListWiew() {
         listModel.removeAllElements();
-        listModel.addAll(service.getAll());
+        listModel.addAll(volunteerService.getAll());
     }
 
     private void showVolunteerDialog(Volunteer v) {
-        new VolunteerDetails(this, this.service, v).setVisible(true);
+        new VolunteerDetails(this, v,
+                this.volunteerService,
+                this.associativeFeeService,
+                this.brevetService,
+                this.medicalVisitService,
+                this.promotionService,
+                this.qualificationService,
+                this.recallService).setVisible(true);
     }
 
     {

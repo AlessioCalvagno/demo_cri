@@ -5,13 +5,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.AssociativeFeeTableModel;
 import it.cri.demo.entity.AssociativeFee;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.AssociativeFeeService;
 import it.cri.demo.ui.dialogs.AssociativeFeeForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AssociativeFeeUI extends JDialog {
@@ -23,13 +21,13 @@ public class AssociativeFeeUI extends JDialog {
 
     private final List<AssociativeFee> associativeFeeList;
 
-    public AssociativeFeeUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public AssociativeFeeUI(Frame owner, Volunteer volunteer, AssociativeFeeService associativeFeeService) {
         super(owner, "Quote associative", true);
-        this.associativeFeeList = volunteer.getAssociativeFees();
+        this.associativeFeeList = associativeFeeService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        insertButton.addActionListener(e -> new AssociativeFeeForm(null, volunteer, volunteerService).setVisible(true));
+        insertButton.addActionListener(e -> new AssociativeFeeForm(null, volunteer, associativeFeeService).setVisible(true));
     }
 
     /**

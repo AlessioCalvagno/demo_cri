@@ -5,13 +5,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.QualificationTableModel;
 import it.cri.demo.entity.Qualification;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.QualificationService;
 import it.cri.demo.ui.dialogs.QualificationForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class QualificationUI extends JDialog {
@@ -22,13 +20,13 @@ public class QualificationUI extends JDialog {
     private JButton insertButton;
     private final List<Qualification> qualificationList;
 
-    public QualificationUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public QualificationUI(Frame owner, Volunteer volunteer, QualificationService qualificationService) {
         super(owner, "Qualifiche", true);
-        this.qualificationList = volunteer.getQualifications();
+        this.qualificationList = qualificationService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        insertButton.addActionListener(e -> new QualificationForm(null, volunteer, volunteerService).setVisible(true));
+        insertButton.addActionListener(e -> new QualificationForm(null, volunteer, qualificationService).setVisible(true));
     }
 
     /**

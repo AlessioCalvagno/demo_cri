@@ -4,5 +4,5 @@ import it.cri.demo.entity.MedicalVisit;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MedicalVisitService extends AbstractService<MedicalVisit> {
+public class MedicalVisitService extends AbstractRelatedService<MedicalVisit> {
 }

@@ -5,13 +5,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.MedicalVisitTableModel;
 import it.cri.demo.entity.MedicalVisit;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.MedicalVisitService;
 import it.cri.demo.ui.dialogs.MedicalVisitForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 
@@ -24,13 +22,13 @@ public class MedicalVisitUI extends JDialog {
 
     private final List<MedicalVisit> medicalVisitList;
 
-    public MedicalVisitUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) throws HeadlessException {
+    public MedicalVisitUI(Frame owner, Volunteer volunteer, MedicalVisitService medicalVisitService) throws HeadlessException {
         super(owner, "Medical visit", true);
-        this.medicalVisitList = volunteer.getMedicalVisits();
+        this.medicalVisitList = medicalVisitService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        insertButton.addActionListener(e -> new MedicalVisitForm(null, volunteer, volunteerService).setVisible(true));
+        insertButton.addActionListener(e -> new MedicalVisitForm(null, volunteer, medicalVisitService).setVisible(true));
     }
 
     /**

@@ -4,6 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Recall;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.RecallService;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
@@ -26,9 +27,9 @@ public class RecallForm extends JDialog {
     private JSeparator separator;
 
     private Volunteer volunteer;
-    private VolunteerService volunteerService;
+    private RecallService recallService;
 
-    public RecallForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public RecallForm(Frame owner, Volunteer volunteer, RecallService recallService) {
         super(owner, "Inserisci richiamo", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
@@ -36,7 +37,7 @@ public class RecallForm extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.volunteerService = volunteerService;
+        this.recallService = recallService;
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
     }
@@ -52,8 +53,7 @@ public class RecallForm extends JDialog {
         r.setActivity(activity);
         r.setVolunteer(this.volunteer);
 
-        this.volunteer.getRecalls().add(r);
-        this.volunteerService.save(this.volunteer);
+        this.recallService.save(r);
     }
 
     /**

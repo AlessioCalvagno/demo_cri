@@ -4,6 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.AssociativeFee;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.AssociativeFeeService;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
@@ -22,16 +23,16 @@ public class AssociativeFeeForm extends JDialog {
     private JSeparator separator;
 
     private Volunteer volunteer;
-    private VolunteerService volunteerService;
+    private AssociativeFeeService associativeFeeService;
 
-    public AssociativeFeeForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public AssociativeFeeForm(Frame owner, Volunteer volunteer, AssociativeFeeService associativeFeeService) {
         super(owner, "Inserisci quota associativa", true);
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.volunteerService = volunteerService;
+        this.associativeFeeService = associativeFeeService;
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
 
@@ -46,8 +47,7 @@ public class AssociativeFeeForm extends JDialog {
         a.setCommittee(committee);
         a.setVolunteer(this.volunteer);
 
-        this.volunteer.getAssociativeFees().add(a);
-        this.volunteerService.save(volunteer);
+        this.associativeFeeService.save(a);
     }
 
     {

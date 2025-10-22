@@ -5,13 +5,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.BrevetTableModel;
 import it.cri.demo.entity.Brevet;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.BrevetService;
 import it.cri.demo.ui.dialogs.BrevetForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class BrevetUI extends JDialog {
@@ -23,13 +21,13 @@ public class BrevetUI extends JDialog {
 
     private final List<Brevet> brevetList;
 
-    public BrevetUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public BrevetUI(Frame owner, Volunteer volunteer, BrevetService brevetService) {
         super(owner, "Brevetti", true);
-        this.brevetList = volunteer.getBrevets();
+        this.brevetList = brevetService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        insertButton.addActionListener(e -> new BrevetForm(null, volunteer, volunteerService).setVisible(true));
+        insertButton.addActionListener(e -> new BrevetForm(null, volunteer, brevetService).setVisible(true));
     }
 
     /**

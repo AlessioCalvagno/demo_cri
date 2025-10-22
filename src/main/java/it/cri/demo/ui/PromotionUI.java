@@ -5,13 +5,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.PromotionTableModel;
 import it.cri.demo.entity.Promotion;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.PromotionService;
 import it.cri.demo.ui.dialogs.PromotionForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PromotionUI extends JDialog {
@@ -23,13 +21,13 @@ public class PromotionUI extends JDialog {
 
     private final List<Promotion> promotionList;
 
-    public PromotionUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public PromotionUI(Frame owner, Volunteer volunteer, PromotionService promotionService) {
         super(owner, "Promozioni e gradi", true);
-        this.promotionList = volunteer.getPromotions();
+        this.promotionList = promotionService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        insertButton.addActionListener(e -> new PromotionForm(null, volunteer, volunteerService).setVisible(true));
+        insertButton.addActionListener(e -> new PromotionForm(null, volunteer, promotionService).setVisible(true));
     }
 
     /**

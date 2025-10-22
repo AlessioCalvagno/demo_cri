@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 @Table
 @Data
-public class MedicalVisit {
+public class MedicalVisit implements RelatedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

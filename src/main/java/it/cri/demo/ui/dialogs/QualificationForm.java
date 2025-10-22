@@ -4,6 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Qualification;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.QualificationService;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
@@ -19,15 +20,15 @@ public class QualificationForm extends JDialog {
     private JButton cancelButton;
 
     private Volunteer volunteer;
-    private VolunteerService volunteerService;
+    private QualificationService qualificationService;
 
-    public QualificationForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public QualificationForm(Frame owner, Volunteer volunteer, QualificationService qualificationService) {
         super(owner, "Inserisci qualifica", true);
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.volunteer = volunteer;
-        this.volunteerService = volunteerService;
+        this.qualificationService = qualificationService;
 
 
         cancelButton.addActionListener(e -> dispose());
@@ -43,8 +44,7 @@ public class QualificationForm extends JDialog {
         q.setCommittee(committee);
         q.setVolunteer(this.volunteer);
 
-        this.volunteer.getQualifications().add(q);
-        this.volunteerService.save(volunteer); //be careful to N+1 problem
+        this.qualificationService.save(q);
     }
 
     {

@@ -4,6 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Brevet;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.BrevetService;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
@@ -25,9 +26,9 @@ public class BrevetForm extends JDialog {
     private JButton cancelButton;
 
     private Volunteer volunteer;
-    private VolunteerService volunteerService;
+    private BrevetService brevetService;
 
-    public BrevetForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public BrevetForm(Frame owner, Volunteer volunteer, BrevetService brevetService) {
         super(owner, "Inserisci brevetto", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
@@ -35,7 +36,7 @@ public class BrevetForm extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.volunteerService = volunteerService;
+        this.brevetService = brevetService;
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
     }
@@ -50,8 +51,7 @@ public class BrevetForm extends JDialog {
         b.setDoctor(doctor);
         b.setVolunteer(this.volunteer);
 
-        this.volunteer.getBrevets().add(b);
-        this.volunteerService.save(this.volunteer);
+        this.brevetService.save(b);
     }
 
     /**

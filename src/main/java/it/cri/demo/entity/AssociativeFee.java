@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table
 @Data
-public class AssociativeFee {
+public class AssociativeFee implements RelatedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,7 +3,7 @@ package it.cri.demo.ui;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -45,65 +45,54 @@ public class VolunteerDetails extends JDialog {
     private JButton promotionButton;
     private JSeparator bottomSeparator;
     private Volunteer volunteer;
-    private final VolunteerService service;
 
-    public VolunteerDetails(Frame owner, VolunteerService service, Volunteer v) throws HeadlessException {
+    private final VolunteerService volunteerService;
+
+    public VolunteerDetails(Frame owner, Volunteer v,
+                            VolunteerService volunteerService,
+                            AssociativeFeeService associativeFeeService,
+                            BrevetService brevetService,
+                            MedicalVisitService medicalVisitService,
+                            PromotionService promotionService,
+                            QualificationService qualificationService,
+                            RecallService recallService) throws HeadlessException {
+
         super(owner, "Dettagli arruolato", true);
         this.volunteer = v;
-        this.service = service;
+        this.volunteerService = volunteerService;
         $$$setupUI$$$();
         updateFields();
         setContentPane(detailPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 500);
         setTitle("Dettagli arruolato");
+
         updateButton.addActionListener(e -> enableFormEdit());
+
         cancelUpdateButton.addActionListener(e -> disableFormEdit());
+
         saveUpdateButton.addActionListener(e -> {
             updateVolunteer();
             updateFields();
             disableFormEdit();
         });
+
         deleteButton.addActionListener(e -> {
             int res = JOptionPane.showConfirmDialog(deleteButton, "Eliminare arruolato " + volunteer.getName() + " " + volunteer.getSurname() + "?", "Elimina record", JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.WARNING_MESSAGE);
             // 0 = OK, 2 = CANCEL, -1 CLOSE DIALOG
             if (res == 0) {
-                service.delete(volunteer);
+                volunteerService.delete(volunteer);
                 dispose();
             }
         });
-        visiteMedicheButton.addActionListener(e -> openMedicalVisitUI());
-        associativeFeeButton.addActionListener(e -> openAssociativeFeeUI());
-        brevetButton.addActionListener(e -> openBrevetUI());
-        recallButton.addActionListener(e -> openRecallUI());
-        qualificationButton.addActionListener(e -> openQualificationUI());
-        promotionButton.addActionListener(e -> openPromotionUI());
-    }
 
-
-    private void openMedicalVisitUI() {
-        new MedicalVisitUI(null, volunteer, service).setVisible(true);
-    }
-
-    private void openAssociativeFeeUI() {
-        new AssociativeFeeUI(null, volunteer, service).setVisible(true);
-    }
-
-    private void openBrevetUI() {
-        new BrevetUI(null, volunteer, service).setVisible(true);
-    }
-
-    private void openRecallUI() {
-        new RecallUI(null, volunteer, service).setVisible(true);
-    }
-
-    private void openQualificationUI() {
-        new QualificationUI(null, volunteer, service).setVisible(true);
-    }
-
-    private void openPromotionUI() {
-        new PromotionUI(null, volunteer, service).setVisible(true);
+        visiteMedicheButton.addActionListener(e -> new MedicalVisitUI(null, volunteer, medicalVisitService).setVisible(true));
+        associativeFeeButton.addActionListener(e -> new AssociativeFeeUI(null, volunteer, associativeFeeService).setVisible(true));
+        brevetButton.addActionListener(e -> new BrevetUI(null, volunteer, brevetService).setVisible(true));
+        recallButton.addActionListener(e -> new RecallUI(null, volunteer, recallService).setVisible(true));
+        qualificationButton.addActionListener(e -> new QualificationUI(null, volunteer, qualificationService).setVisible(true));
+        promotionButton.addActionListener(e -> new PromotionUI(null, volunteer, promotionService).setVisible(true));
     }
 
     private void updateVolunteer() {
@@ -116,7 +105,7 @@ public class VolunteerDetails extends JDialog {
         volunteer.setPecAddress(pecField.getText());
         volunteer.setResidenceAddress(residenceField.getText());
         volunteer.setRegistrationNumber(registrationNumberField.getText());
-        this.volunteer = service.save(volunteer);
+        this.volunteer = volunteerService.save(volunteer);
     }
 
     private void updateFields() {

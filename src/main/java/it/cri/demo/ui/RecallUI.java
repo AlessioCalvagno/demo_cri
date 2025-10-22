@@ -5,13 +5,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.RecallTableModel;
 import it.cri.demo.entity.Recall;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.RecallService;
 import it.cri.demo.ui.dialogs.RecallForm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class RecallUI extends JDialog {
@@ -23,13 +21,13 @@ public class RecallUI extends JDialog {
 
     private final List<Recall> recallList;
 
-    public RecallUI(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public RecallUI(Frame owner, Volunteer volunteer, RecallService recallService) {
         super(owner, "Richiami", true);
-        this.recallList = volunteer.getRecalls();
+        this.recallList = recallService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(800, 500);
-        insertButton.addActionListener(e -> new RecallForm(null, volunteer, volunteerService).setVisible(true));
+        insertButton.addActionListener(e -> new RecallForm(null, volunteer, recallService).setVisible(true));
     }
 
     /**

@@ -4,6 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Promotion;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.PromotionService;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
@@ -24,9 +25,9 @@ public class PromotionForm extends JDialog {
     private JSeparator separator;
 
     private Volunteer volunteer;
-    private VolunteerService volunteerService;
+    private PromotionService promotionService;
 
-    public PromotionForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public PromotionForm(Frame owner, Volunteer volunteer, PromotionService promotionService) {
         super(owner, "Inserisci promozione", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
@@ -34,7 +35,7 @@ public class PromotionForm extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.volunteerService = volunteerService;
+        this.promotionService = promotionService;
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
     }
@@ -49,8 +50,7 @@ public class PromotionForm extends JDialog {
         p.setDegree(degree);
         p.setVolunteer(this.volunteer);
 
-        this.volunteer.getPromotions().add(p);
-        this.volunteerService.save(this.volunteer);
+        this.promotionService.save(p);
     }
 
     /**

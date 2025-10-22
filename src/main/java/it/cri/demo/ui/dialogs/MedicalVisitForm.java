@@ -4,6 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.MedicalVisit;
 import it.cri.demo.entity.Volunteer;
+import it.cri.demo.service.MedicalVisitService;
 import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
@@ -26,9 +27,9 @@ public class MedicalVisitForm extends JDialog {
     private JSeparator separator;
 
     private Volunteer volunteer;
-    private VolunteerService volunteerService;
+    private  MedicalVisitService medicalVisitService;
 
-    public MedicalVisitForm(Frame owner, Volunteer volunteer, VolunteerService volunteerService) {
+    public MedicalVisitForm(Frame owner, Volunteer volunteer,  MedicalVisitService medicalVisitService) {
         super(owner, "Inserisci visita medica", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
@@ -36,7 +37,7 @@ public class MedicalVisitForm extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.volunteerService = volunteerService;
+        this.medicalVisitService = medicalVisitService;
 
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
@@ -52,8 +53,8 @@ public class MedicalVisitForm extends JDialog {
         m.setDoctor(doctor);
         m.setVolunteer(this.volunteer);
 
-        this.volunteer.getMedicalVisits().add(m);
-        this.volunteerService.save(this.volunteer);
+        this.medicalVisitService.save(m);
+        dispose();
     }
 
     /**

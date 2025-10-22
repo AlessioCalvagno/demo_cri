@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 @Table
 @Data
-public class Brevet {
+public class Brevet implements RelatedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
