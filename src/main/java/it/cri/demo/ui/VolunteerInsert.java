@@ -24,12 +24,6 @@ public class VolunteerInsert extends JDialog {
     private JTextField emailField;
     private JTextField residenceField;
     private JTextField registrationNumberField;
-    private JTextField feeField;
-    private JTextField rankField;
-    private JFormattedTextField lastRecallField;
-    private JTextField activityField;
-    private JFormattedTextField lastVisitField;
-    private JFormattedTextField nextVisitField;
     private JLabel nameLabel;
     private JLabel surnameLabel;
     private JLabel birthDateLabel;
@@ -37,18 +31,11 @@ public class VolunteerInsert extends JDialog {
     private JLabel emailLabel;
     private JLabel phoneLabel;
     private JLabel registrationNumberLabel;
-    private JLabel feeLabel;
-    private JLabel rankLabel;
-    private JLabel lastRecallLabel;
-    private JLabel activityLabel;
-    private JLabel lastVisitLabel;
-    private JLabel nextVisitLabel;
     private JButton saveButton;
     private JButton cancelButton;
     private JTextField pecField;
     private JLabel pecLabel;
     private JLabel residenceLabel;
-    private JButton fileButton;
     private final VolunteerService service;
 
 
@@ -57,7 +44,7 @@ public class VolunteerInsert extends JDialog {
         $$$setupUI$$$();
         setContentPane(detailPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(800, 500);
+        setSize(400, 300);
         setTitle("Nuovo arruolato");
         this.service = service;
 
@@ -66,32 +53,19 @@ public class VolunteerInsert extends JDialog {
             dispose();
         });
         cancelButton.addActionListener(e -> dispose());
-        fileButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                //TODO: complete implementation with db save
-                System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
-            }
-        });
     }
 
     private void insertVolunteer() {
         Volunteer v = new Volunteer();
         v.setName(nameField.getText());
         v.setSurname(surnameField.getText());
-        v.setBirthDate(LocalDate.parse(birthDateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
+        v.setBirthDate(LocalDate.parse(birthDateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         v.setBirthPlace(birthPlaceField.getText());
         v.setPhoneNumber(phoneField.getText());
         v.setEmailAddress(emailField.getText());
         v.setPecAddress(pecField.getText());
         v.setResidenceAddress(residenceField.getText());
         v.setRegistrationNumber(registrationNumberField.getText());
-        v.setFee(Double.valueOf(feeField.getText()));
-        v.setRankValue(rankField.getText());
-        v.setLastRecall(LocalDate.parse(lastRecallField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
-        v.setLastActivity(activityField.getText());
-        v.setLastMedicalVisit(LocalDate.parse(lastVisitField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
-        v.setNextMedicalVisit(LocalDate.parse(nextVisitField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))); //TODO check format
         service.save(v);
     }
 
@@ -105,7 +79,7 @@ public class VolunteerInsert extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         detailPanel = new JPanel();
-        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,fill:max(d;4px):noGrow,fill:d:noGrow,center:max(d;4px):noGrow"));
+        detailPanel.setLayout(new FormLayout("fill:d:grow,fill:d:grow", "fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:d:grow,center:max(d;4px):noGrow"));
         detailPanel.setAlignmentX(0.5f);
         detailPanel.setAlignmentY(0.5f);
         detailPanel.setAutoscrolls(true);
@@ -160,55 +134,12 @@ public class VolunteerInsert extends JDialog {
         phoneLabel = new JLabel();
         phoneLabel.setText("Cellulare");
         detailPanel.add(phoneLabel, cc.xy(1, 7, CellConstraints.LEFT, CellConstraints.FILL));
-        final JSeparator separator1 = new JSeparator();
-        detailPanel.add(separator1, cc.xy(1, 11, CellConstraints.FILL, CellConstraints.FILL));
-        final JSeparator separator2 = new JSeparator();
-        detailPanel.add(separator2, cc.xy(2, 11, CellConstraints.FILL, CellConstraints.FILL));
-        feeField = new JTextField();
-        feeField.setEditable(true);
-        feeField.setPreferredSize(new Dimension(100, 30));
-        detailPanel.add(feeField, cc.xy(2, 13, CellConstraints.FILL, CellConstraints.CENTER));
-        feeLabel = new JLabel();
-        feeLabel.setText("Quota ass.");
-        detailPanel.add(feeLabel, cc.xy(2, 12, CellConstraints.LEFT, CellConstraints.DEFAULT));
-        rankField = new JTextField();
-        rankField.setEditable(true);
-        rankField.setPreferredSize(new Dimension(100, 30));
-        detailPanel.add(rankField, cc.xy(1, 15, CellConstraints.FILL, CellConstraints.CENTER));
-        rankLabel = new JLabel();
-        rankLabel.setText("Grado");
-        detailPanel.add(rankLabel, cc.xy(1, 14, CellConstraints.LEFT, CellConstraints.FILL));
-        lastRecallField.setEditable(true);
-        lastRecallField.setPreferredSize(new Dimension(100, 30));
-        detailPanel.add(lastRecallField, cc.xy(2, 15, CellConstraints.FILL, CellConstraints.CENTER));
-        lastRecallLabel = new JLabel();
-        lastRecallLabel.setText("Ultimo richiamo");
-        detailPanel.add(lastRecallLabel, cc.xy(2, 14));
-        activityField = new JTextField();
-        activityField.setEditable(true);
-        activityField.setPreferredSize(new Dimension(100, 30));
-        detailPanel.add(activityField, cc.xy(1, 17, CellConstraints.FILL, CellConstraints.DEFAULT));
-        activityLabel = new JLabel();
-        activityLabel.setText("Attività");
-        detailPanel.add(activityLabel, cc.xy(1, 16));
-        lastVisitField.setEditable(true);
-        lastVisitField.setPreferredSize(new Dimension(100, 30));
-        detailPanel.add(lastVisitField, cc.xy(1, 19, CellConstraints.FILL, CellConstraints.DEFAULT));
-        lastVisitLabel = new JLabel();
-        lastVisitLabel.setText("Ultima visita");
-        detailPanel.add(lastVisitLabel, cc.xy(1, 18));
-        nextVisitField.setEditable(true);
-        nextVisitField.setPreferredSize(new Dimension(100, 30));
-        detailPanel.add(nextVisitField, cc.xy(2, 19, CellConstraints.FILL, CellConstraints.CENTER));
-        nextVisitLabel = new JLabel();
-        nextVisitLabel.setText("Prox. visita");
-        detailPanel.add(nextVisitLabel, cc.xy(2, 18));
         saveButton = new JButton();
         saveButton.setText("Salva");
-        detailPanel.add(saveButton, cc.xy(1, 20));
+        detailPanel.add(saveButton, cc.xy(1, 12));
         cancelButton = new JButton();
         cancelButton.setText("Annulla");
-        detailPanel.add(cancelButton, cc.xy(2, 20));
+        detailPanel.add(cancelButton, cc.xy(2, 12));
         registrationNumberField = new JTextField();
         registrationNumberField.setEditable(true);
         registrationNumberField.setPreferredSize(new Dimension(100, 30));
@@ -222,9 +153,8 @@ public class VolunteerInsert extends JDialog {
         residenceLabel = new JLabel();
         residenceLabel.setText("Residenza");
         detailPanel.add(residenceLabel, cc.xy(1, 9));
-        fileButton = new JButton();
-        fileButton.setText("Scegli file - TEST");
-        detailPanel.add(fileButton, cc.xy(1, 13));
+        final JSeparator separator1 = new JSeparator();
+        detailPanel.add(separator1, cc.xyw(1, 11, 2, CellConstraints.FILL, CellConstraints.FILL));
     }
 
     /**
@@ -246,14 +176,5 @@ public class VolunteerInsert extends JDialog {
 
         birthDateField = new JFormattedTextField(dateFormatter);
         birthDateField.setColumns(10);
-
-        lastRecallField = new JFormattedTextField(dateFormatter);
-        lastRecallField.setColumns(10);
-
-        lastVisitField = new JFormattedTextField(dateFormatter);
-        lastVisitField.setColumns(10);
-
-        nextVisitField = new JFormattedTextField(dateFormatter);
-        nextVisitField.setColumns(10);
     }
 }
