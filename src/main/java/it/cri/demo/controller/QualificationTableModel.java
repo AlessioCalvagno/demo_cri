@@ -8,7 +8,7 @@ public class QualificationTableModel extends AbstractCustomTableModel<Qualificat
 
 
     public QualificationTableModel(List<Qualification> data) {
-        super(data, new String[]{"id","type","committee"});
+        super(data, new String[]{"ID","Tipo","Comitato"});
     }
 
     @Override

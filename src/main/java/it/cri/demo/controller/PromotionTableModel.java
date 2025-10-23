@@ -9,7 +9,7 @@ public class PromotionTableModel extends AbstractCustomTableModel<Promotion> {
 
 
     public PromotionTableModel(List<Promotion> data) {
-        super(data, new String[]{"id","date","degree"});
+        super(data, new String[]{"ID","Data","Grado"});
     }
 
     @Override

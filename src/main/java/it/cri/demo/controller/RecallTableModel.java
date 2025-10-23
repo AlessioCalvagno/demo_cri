@@ -9,7 +9,7 @@ public class RecallTableModel extends AbstractCustomTableModel<Recall> {
 
 
     public RecallTableModel(List<Recall> data) {
-        super(data, new String[]{"id","startDate","endDate","activity"});
+        super(data, new String[]{"ID","Data inizio","Data fine","Attività"});
     }
 
     @Override

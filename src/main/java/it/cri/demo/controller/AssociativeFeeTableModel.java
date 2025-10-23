@@ -8,7 +8,7 @@ public class AssociativeFeeTableModel extends AbstractCustomTableModel<Associati
 
 
     public AssociativeFeeTableModel(List<AssociativeFee> data) {
-        super(data, new String[]{"id","year","committee"});
+        super(data, new String[]{"ID","Anno","Comitato"});
     }
 
     @Override

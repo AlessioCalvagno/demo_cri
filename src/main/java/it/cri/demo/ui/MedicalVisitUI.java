@@ -23,7 +23,7 @@ public class MedicalVisitUI extends JDialog {
     private final List<MedicalVisit> medicalVisitList;
 
     public MedicalVisitUI(Frame owner, Volunteer volunteer, MedicalVisitService medicalVisitService) throws HeadlessException {
-        super(owner, "Medical visit", true);
+        super(owner, "Visite mediche", true);
         this.medicalVisitList = medicalVisitService.getAllByVolunteer(volunteer);
         $$$setupUI$$$();
         setContentPane(mainPanel);

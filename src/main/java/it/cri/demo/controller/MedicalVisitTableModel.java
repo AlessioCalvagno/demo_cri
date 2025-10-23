@@ -9,7 +9,7 @@ public class MedicalVisitTableModel extends AbstractCustomTableModel<MedicalVisi
 
 
     public MedicalVisitTableModel(List<MedicalVisit> data) {
-        super(data, new String[]{"id", "date", "doctor"});
+        super(data, new String[]{"ID", "Data", "Dottore"});
     }
 
     @Override

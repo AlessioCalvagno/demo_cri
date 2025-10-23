@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BrevetTableModel extends AbstractCustomTableModel<Brevet>{
     public BrevetTableModel(List<Brevet> data) {
-        super(data, new String[]{"id","date","doctor"});
+        super(data, new String[]{"ID","Data","Dottore"});
     }
 
     @Override
