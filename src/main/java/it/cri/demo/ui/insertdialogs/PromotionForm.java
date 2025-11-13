@@ -1,42 +1,40 @@
-package it.cri.demo.ui.dialogs;
+package it.cri.demo.ui.insertdialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import it.cri.demo.entity.Brevet;
+import it.cri.demo.entity.Promotion;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.BrevetService;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.PromotionService;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class BrevetForm extends JDialog {
-    private JFormattedTextField dateFormattedField;
+public class PromotionForm extends JDialog {
     private JPanel mainPanel;
-    private JLabel dateLabel;
-    private JTextField doctorField;
-    private JLabel doctorLabel;
+    private JFormattedTextField dateFormattedField;
+    private JTextField degreeField;
     private JButton insertButton;
     private JButton cancelButton;
+    private JLabel dateLabel;
+    private JLabel degreeLabel;
+    private JSeparator separator;
 
     private Volunteer volunteer;
-    private BrevetService brevetService;
+    private PromotionService promotionService;
 
-    public BrevetForm(Frame owner, Volunteer volunteer, BrevetService brevetService) {
-        super(owner, "Inserisci brevetto", true);
+    public PromotionForm(Frame owner, Volunteer volunteer, PromotionService promotionService) {
+        super(owner, "Inserisci promozione", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.brevetService = brevetService;
+        this.promotionService = promotionService;
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
     }
@@ -44,14 +42,14 @@ public class BrevetForm extends JDialog {
     private void confirmSave() {
         //TODO: dateFormattedField.getText() or dateFormattedField.getValue()?
         LocalDate date = LocalDate.parse(dateFormattedField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String doctor = doctorField.getText();
+        String degree = degreeField.getText();
 
-        Brevet b = new Brevet();
-        b.setDate(date);
-        b.setDoctor(doctor);
-        b.setVolunteer(this.volunteer);
+        Promotion p = new Promotion();
+        p.setDate(date);
+        p.setDegree(degree);
+        p.setVolunteer(this.volunteer);
 
-        this.brevetService.save(b);
+        this.promotionService.save(p);
     }
 
     /**
@@ -64,30 +62,23 @@ public class BrevetForm extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):grow,center:max(d;4px):noGrow"));
-        dateFormattedField.setPreferredSize(new Dimension(160, 30));
-        dateFormattedField.setText("");
+        mainPanel.setLayout(new FormLayout("fill:max(d;4px):grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:d:grow,center:max(d;4px):noGrow"));
         CellConstraints cc = new CellConstraints();
         mainPanel.add(dateFormattedField, cc.xyw(1, 2, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
         dateLabel = new JLabel();
-        dateLabel.setPreferredSize(new Dimension(160, 17));
         dateLabel.setText("Data");
         mainPanel.add(dateLabel, cc.xyw(1, 1, 2));
-        doctorField = new JTextField();
-        doctorField.setPreferredSize(new Dimension(160, 30));
-        mainPanel.add(doctorField, cc.xyw(1, 4, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
-        doctorLabel = new JLabel();
-        doctorLabel.setPreferredSize(new Dimension(160, 17));
-        doctorLabel.setText("Dottore");
-        mainPanel.add(doctorLabel, cc.xyw(1, 3, 2));
-        final JSeparator separator1 = new JSeparator();
-        mainPanel.add(separator1, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
+        degreeField = new JTextField();
+        mainPanel.add(degreeField, cc.xyw(1, 4, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
+        degreeLabel = new JLabel();
+        degreeLabel.setText("Grado");
+        mainPanel.add(degreeLabel, cc.xyw(1, 3, 2));
+        separator = new JSeparator();
+        mainPanel.add(separator, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
         insertButton = new JButton();
-        insertButton.setPreferredSize(new Dimension(80, 30));
         insertButton.setText("Inserisci");
         mainPanel.add(insertButton, cc.xy(1, 6));
         cancelButton = new JButton();
-        cancelButton.setPreferredSize(new Dimension(80, 30));
         cancelButton.setText("Annulla");
         mainPanel.add(cancelButton, cc.xy(2, 6));
     }

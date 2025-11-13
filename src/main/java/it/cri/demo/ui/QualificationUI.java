@@ -6,7 +6,7 @@ import it.cri.demo.controller.QualificationTableModel;
 import it.cri.demo.entity.Qualification;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.QualificationService;
-import it.cri.demo.ui.dialogs.QualificationForm;
+import it.cri.demo.ui.insertdialogs.QualificationForm;
 
 import javax.swing.*;
 import java.awt.*;

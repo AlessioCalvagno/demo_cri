@@ -6,7 +6,7 @@ import it.cri.demo.controller.MedicalVisitTableModel;
 import it.cri.demo.entity.MedicalVisit;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.MedicalVisitService;
-import it.cri.demo.ui.dialogs.MedicalVisitForm;
+import it.cri.demo.ui.insertdialogs.MedicalVisitForm;
 
 import javax.swing.*;
 import java.awt.*;

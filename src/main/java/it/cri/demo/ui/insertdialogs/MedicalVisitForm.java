@@ -1,11 +1,10 @@
-package it.cri.demo.ui.dialogs;
+package it.cri.demo.ui.insertdialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import it.cri.demo.entity.Promotion;
+import it.cri.demo.entity.MedicalVisit;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.PromotionService;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.MedicalVisitService;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -14,28 +13,29 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class PromotionForm extends JDialog {
+public class MedicalVisitForm extends JDialog {
     private JPanel mainPanel;
     private JFormattedTextField dateFormattedField;
-    private JTextField degreeField;
+    private JTextField doctorField;
+    private JLabel dateLabel;
+    private JLabel doctorLabel;
     private JButton insertButton;
     private JButton cancelButton;
-    private JLabel dateLabel;
-    private JLabel degreeLabel;
     private JSeparator separator;
 
     private Volunteer volunteer;
-    private PromotionService promotionService;
+    private  MedicalVisitService medicalVisitService;
 
-    public PromotionForm(Frame owner, Volunteer volunteer, PromotionService promotionService) {
-        super(owner, "Inserisci promozione", true);
+    public MedicalVisitForm(Frame owner, Volunteer volunteer,  MedicalVisitService medicalVisitService) {
+        super(owner, "Inserisci visita medica", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.promotionService = promotionService;
+        this.medicalVisitService = medicalVisitService;
+
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
     }
@@ -43,14 +43,15 @@ public class PromotionForm extends JDialog {
     private void confirmSave() {
         //TODO: dateFormattedField.getText() or dateFormattedField.getValue()?
         LocalDate date = LocalDate.parse(dateFormattedField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String degree = degreeField.getText();
+        String doctor = doctorField.getText();
 
-        Promotion p = new Promotion();
-        p.setDate(date);
-        p.setDegree(degree);
-        p.setVolunteer(this.volunteer);
+        MedicalVisit m = new MedicalVisit();
+        m.setDate(date);
+        m.setDoctor(doctor);
+        m.setVolunteer(this.volunteer);
 
-        this.promotionService.save(p);
+        this.medicalVisitService.save(m);
+        dispose();
     }
 
     /**
@@ -64,19 +65,24 @@ public class PromotionForm extends JDialog {
         createUIComponents();
         mainPanel = new JPanel();
         mainPanel.setLayout(new FormLayout("fill:max(d;4px):grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:d:grow,center:max(d;4px):noGrow"));
+        dateFormattedField.setPreferredSize(new Dimension(160, 30));
         CellConstraints cc = new CellConstraints();
         mainPanel.add(dateFormattedField, cc.xyw(1, 2, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
         dateLabel = new JLabel();
+        dateLabel.setPreferredSize(new Dimension(160, 17));
         dateLabel.setText("Data");
         mainPanel.add(dateLabel, cc.xyw(1, 1, 2));
-        degreeField = new JTextField();
-        mainPanel.add(degreeField, cc.xyw(1, 4, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
-        degreeLabel = new JLabel();
-        degreeLabel.setText("Grado");
-        mainPanel.add(degreeLabel, cc.xyw(1, 3, 2));
+        doctorField = new JTextField();
+        doctorField.setPreferredSize(new Dimension(160, 30));
+        mainPanel.add(doctorField, cc.xyw(1, 4, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
+        doctorLabel = new JLabel();
+        doctorLabel.setPreferredSize(new Dimension(160, 17));
+        doctorLabel.setText("Dottore");
+        mainPanel.add(doctorLabel, cc.xyw(1, 3, 2));
         separator = new JSeparator();
         mainPanel.add(separator, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
         insertButton = new JButton();
+        insertButton.setPreferredSize(new Dimension(80, 30));
         insertButton.setText("Inserisci");
         mainPanel.add(insertButton, cc.xy(1, 6));
         cancelButton = new JButton();

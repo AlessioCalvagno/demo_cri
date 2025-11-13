@@ -6,7 +6,7 @@ import it.cri.demo.controller.BrevetTableModel;
 import it.cri.demo.entity.Brevet;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.BrevetService;
-import it.cri.demo.ui.dialogs.BrevetForm;
+import it.cri.demo.ui.insertdialogs.BrevetForm;
 
 import javax.swing.*;
 import java.awt.*;

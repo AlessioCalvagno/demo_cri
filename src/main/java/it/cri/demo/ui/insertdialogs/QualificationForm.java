@@ -1,11 +1,10 @@
-package it.cri.demo.ui.dialogs;
+package it.cri.demo.ui.insertdialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Qualification;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.QualificationService;
-import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;

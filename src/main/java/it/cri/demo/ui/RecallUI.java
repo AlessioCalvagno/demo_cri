@@ -6,7 +6,7 @@ import it.cri.demo.controller.RecallTableModel;
 import it.cri.demo.entity.Recall;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.RecallService;
-import it.cri.demo.ui.dialogs.RecallForm;
+import it.cri.demo.ui.insertdialogs.RecallForm;
 
 import javax.swing.*;
 import java.awt.*;

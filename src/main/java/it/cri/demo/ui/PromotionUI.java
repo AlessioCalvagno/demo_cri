@@ -6,7 +6,7 @@ import it.cri.demo.controller.PromotionTableModel;
 import it.cri.demo.entity.Promotion;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.PromotionService;
-import it.cri.demo.ui.dialogs.PromotionForm;
+import it.cri.demo.ui.insertdialogs.PromotionForm;
 
 import javax.swing.*;
 import java.awt.*;

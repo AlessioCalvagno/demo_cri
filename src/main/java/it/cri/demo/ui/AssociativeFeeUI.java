@@ -6,7 +6,7 @@ import it.cri.demo.controller.AssociativeFeeTableModel;
 import it.cri.demo.entity.AssociativeFee;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.AssociativeFeeService;
-import it.cri.demo.ui.dialogs.AssociativeFeeForm;
+import it.cri.demo.ui.insertdialogs.AssociativeFeeForm;
 
 import javax.swing.*;
 import java.awt.*;

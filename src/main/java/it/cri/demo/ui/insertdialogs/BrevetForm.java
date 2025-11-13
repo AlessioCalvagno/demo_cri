@@ -1,44 +1,39 @@
-package it.cri.demo.ui.dialogs;
+package it.cri.demo.ui.insertdialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import it.cri.demo.entity.MedicalVisit;
+import it.cri.demo.entity.Brevet;
 import it.cri.demo.entity.Volunteer;
-import it.cri.demo.service.MedicalVisitService;
-import it.cri.demo.service.VolunteerService;
+import it.cri.demo.service.BrevetService;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class MedicalVisitForm extends JDialog {
-    private JPanel mainPanel;
+public class BrevetForm extends JDialog {
     private JFormattedTextField dateFormattedField;
-    private JTextField doctorField;
+    private JPanel mainPanel;
     private JLabel dateLabel;
+    private JTextField doctorField;
     private JLabel doctorLabel;
     private JButton insertButton;
     private JButton cancelButton;
-    private JSeparator separator;
 
     private Volunteer volunteer;
-    private  MedicalVisitService medicalVisitService;
+    private BrevetService brevetService;
 
-    public MedicalVisitForm(Frame owner, Volunteer volunteer,  MedicalVisitService medicalVisitService) {
-        super(owner, "Inserisci visita medica", true);
+    public BrevetForm(Frame owner, Volunteer volunteer, BrevetService brevetService) {
+        super(owner, "Inserisci brevetto", true);
         $$$setupUI$$$();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.volunteer = volunteer;
-        this.medicalVisitService = medicalVisitService;
-
+        this.brevetService = brevetService;
         cancelButton.addActionListener(e -> dispose());
         insertButton.addActionListener(e -> confirmSave());
     }
@@ -48,13 +43,12 @@ public class MedicalVisitForm extends JDialog {
         LocalDate date = LocalDate.parse(dateFormattedField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String doctor = doctorField.getText();
 
-        MedicalVisit m = new MedicalVisit();
-        m.setDate(date);
-        m.setDoctor(doctor);
-        m.setVolunteer(this.volunteer);
+        Brevet b = new Brevet();
+        b.setDate(date);
+        b.setDoctor(doctor);
+        b.setVolunteer(this.volunteer);
 
-        this.medicalVisitService.save(m);
-        dispose();
+        this.brevetService.save(b);
     }
 
     /**
@@ -67,8 +61,9 @@ public class MedicalVisitForm extends JDialog {
     private void $$$setupUI$$$() {
         createUIComponents();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:max(d;4px):grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:d:grow,center:max(d;4px):noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow,fill:max(d;4px):grow", "fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):noGrow,center:max(d;4px):noGrow,fill:max(d;4px):grow,center:max(d;4px):noGrow"));
         dateFormattedField.setPreferredSize(new Dimension(160, 30));
+        dateFormattedField.setText("");
         CellConstraints cc = new CellConstraints();
         mainPanel.add(dateFormattedField, cc.xyw(1, 2, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
         dateLabel = new JLabel();
@@ -82,13 +77,14 @@ public class MedicalVisitForm extends JDialog {
         doctorLabel.setPreferredSize(new Dimension(160, 17));
         doctorLabel.setText("Dottore");
         mainPanel.add(doctorLabel, cc.xyw(1, 3, 2));
-        separator = new JSeparator();
-        mainPanel.add(separator, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
+        final JSeparator separator1 = new JSeparator();
+        mainPanel.add(separator1, cc.xyw(1, 5, 2, CellConstraints.FILL, CellConstraints.FILL));
         insertButton = new JButton();
         insertButton.setPreferredSize(new Dimension(80, 30));
         insertButton.setText("Inserisci");
         mainPanel.add(insertButton, cc.xy(1, 6));
         cancelButton = new JButton();
+        cancelButton.setPreferredSize(new Dimension(80, 30));
         cancelButton.setText("Annulla");
         mainPanel.add(cancelButton, cc.xy(2, 6));
     }

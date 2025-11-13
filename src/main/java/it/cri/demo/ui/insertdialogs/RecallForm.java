@@ -1,11 +1,10 @@
-package it.cri.demo.ui.dialogs;
+package it.cri.demo.ui.insertdialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.Recall;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.RecallService;
-import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;

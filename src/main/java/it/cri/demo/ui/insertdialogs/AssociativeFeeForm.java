@@ -1,16 +1,13 @@
-package it.cri.demo.ui.dialogs;
+package it.cri.demo.ui.insertdialogs;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.entity.AssociativeFee;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.AssociativeFeeService;
-import it.cri.demo.service.VolunteerService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AssociativeFeeForm extends JDialog {
     private JTextField yearField;
