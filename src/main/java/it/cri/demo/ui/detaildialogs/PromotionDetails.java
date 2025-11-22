@@ -8,6 +8,9 @@ import it.cri.demo.service.PromotionService;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +29,8 @@ public class PromotionDetails extends JDialog {
     private JButton uploadButton;
 
     private Promotion promotion;
-    private PromotionService promotionService;
+    private final PromotionService promotionService;
+    private File tmpFile;
 
     public PromotionDetails(Frame owner, Promotion promotion, PromotionService promotionService) {
         super(owner, "Dettagli promozione", true);
@@ -38,6 +42,7 @@ public class PromotionDetails extends JDialog {
 
         this.promotion = promotion;
         this.promotionService = promotionService;
+        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {
@@ -46,9 +51,15 @@ public class PromotionDetails extends JDialog {
         });
 
         confermaButton.addActionListener(e -> {
-            updatePromotion();
-            updateFields();
-            disableFormEdit();
+            try {
+                updatePromotion();
+                updateFields();
+                disableFormEdit();
+            } catch (IOException ex) {
+                System.out.println("Error in updatePromotion(): " + ex.getMessage());
+                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: "+ ex.getMessage(),
+                        "Errore", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         deleteButton.addActionListener(e -> {
@@ -60,11 +71,20 @@ public class PromotionDetails extends JDialog {
                 dispose();
             }
         });
+
+        uploadButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+                tmpFile = fileChooser.getSelectedFile();
+            }
+        });
     }
 
-    private void updatePromotion() {
+    private void updatePromotion() throws IOException {
         promotion.setDate(LocalDate.parse(dateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         promotion.setDegree(degreeField.getText());
+        if (tmpFile != null)
+            promotion.setFile(Files.readAllBytes(tmpFile.toPath()));
         this.promotion = promotionService.save(promotion);
     }
 

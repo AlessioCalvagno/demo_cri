@@ -7,6 +7,9 @@ import it.cri.demo.service.AssociativeFeeService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class AssociativeFeeDetails extends JDialog {
     private JPanel mainPanel;
@@ -23,6 +26,7 @@ public class AssociativeFeeDetails extends JDialog {
 
     private AssociativeFee associativeFee;
     private final AssociativeFeeService associativeFeeService;
+    private File tmpFile;
 
     public AssociativeFeeDetails(Frame owner, AssociativeFee associativeFee, AssociativeFeeService associativeFeeService) {
         super(owner, "Dettagli quota associativa", true);
@@ -34,6 +38,7 @@ public class AssociativeFeeDetails extends JDialog {
 
         this.associativeFee = associativeFee;
         this.associativeFeeService = associativeFeeService;
+        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {
@@ -42,9 +47,15 @@ public class AssociativeFeeDetails extends JDialog {
         });
 
         confermaButton.addActionListener(e -> {
-            updateAssociativeFee();
-            updateFields();
-            disableFormEdit();
+            try {
+                updateAssociativeFee();
+                updateFields();
+                disableFormEdit();
+            } catch (IOException ex) {
+                System.out.println("Error in updateAssociativeFee(): " + ex.getMessage());
+                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: "+ ex.getMessage(),
+                        "Errore", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         deleteButton.addActionListener(e -> {
@@ -56,11 +67,20 @@ public class AssociativeFeeDetails extends JDialog {
                 dispose();
             }
         });
+
+        uploadButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+                tmpFile = fileChooser.getSelectedFile();
+            }
+        });
     }
 
-    private void updateAssociativeFee() {
+    private void updateAssociativeFee() throws IOException {
         associativeFee.setYear(Integer.parseInt(yearField.getText()));
         associativeFee.setCommittee(committeeField.getText());
+        if (tmpFile != null)
+            associativeFee.setFile(Files.readAllBytes(tmpFile.toPath()));
         this.associativeFee = associativeFeeService.save(associativeFee);
     }
 

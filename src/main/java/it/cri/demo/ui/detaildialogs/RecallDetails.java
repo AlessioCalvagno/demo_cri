@@ -8,6 +8,9 @@ import it.cri.demo.service.RecallService;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,7 +31,8 @@ public class RecallDetails extends JDialog {
     private JLabel endDateLabel;
 
     private Recall recall;
-    private RecallService recallService;
+    private final RecallService recallService;
+    private File tmpFile;
 
     public RecallDetails(Frame owner, Recall recall, RecallService recallService) {
         super(owner, "Dettagli richiamo", true);
@@ -40,6 +44,7 @@ public class RecallDetails extends JDialog {
 
         this.recall = recall;
         this.recallService = recallService;
+        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {
@@ -48,9 +53,15 @@ public class RecallDetails extends JDialog {
         });
 
         confermaButton.addActionListener(e -> {
-            updateRecall();
-            updateFields();
-            disableFormEdit();
+            try {
+                updateRecall();
+                updateFields();
+                disableFormEdit();
+            } catch (IOException ex) {
+                System.out.println("Error in updateRecall(): " + ex.getMessage());
+                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: "+ ex.getMessage(),
+                        "Errore", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         deleteButton.addActionListener(e -> {
@@ -62,12 +73,21 @@ public class RecallDetails extends JDialog {
                 dispose();
             }
         });
+
+        uploadButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+                tmpFile = fileChooser.getSelectedFile();
+            }
+        });
     }
 
-    private void updateRecall() {
+    private void updateRecall() throws IOException {
         recall.setStartDate(LocalDate.parse(startDateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         recall.setEndDate(LocalDate.parse(endDateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         recall.setActivity(activityField.getText());
+        if (tmpFile != null)
+            recall.setFile(Files.readAllBytes(tmpFile.toPath()));
         this.recall = recallService.save(recall);
     }
 

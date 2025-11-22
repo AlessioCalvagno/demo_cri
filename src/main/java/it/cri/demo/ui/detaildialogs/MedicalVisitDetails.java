@@ -8,6 +8,11 @@ import it.cri.demo.service.MedicalVisitService;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +31,8 @@ public class MedicalVisitDetails extends JDialog {
     private JButton uploadButton;
 
     private MedicalVisit medicalVisit;
-    private MedicalVisitService medicalVisitService;
+    private final MedicalVisitService medicalVisitService;
+    private File tmpFile;
 
     public MedicalVisitDetails(Frame owner, MedicalVisit medicalVisit, MedicalVisitService medicalVisitService) {
         super(owner, "Dettagli visita medica", true);
@@ -38,6 +44,7 @@ public class MedicalVisitDetails extends JDialog {
 
         this.medicalVisit = medicalVisit;
         this.medicalVisitService = medicalVisitService;
+        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {
@@ -46,9 +53,15 @@ public class MedicalVisitDetails extends JDialog {
         });
 
         confermaButton.addActionListener(e -> {
-            updateMedicalVisit();
-            updateFields();
-            disableFormEdit();
+            try {
+                updateMedicalVisit();
+                updateFields();
+                disableFormEdit();
+            } catch (IOException ex) {
+                System.out.println("Error in updateMedicalVisit(): " + ex.getMessage());
+                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: "+ ex.getMessage(),
+                        "Errore", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         deleteButton.addActionListener(e -> {
@@ -60,11 +73,20 @@ public class MedicalVisitDetails extends JDialog {
                 dispose();
             }
         });
+
+        uploadButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+                tmpFile = fileChooser.getSelectedFile();
+            }
+        });
     }
 
-    private void updateMedicalVisit() {
+    private void updateMedicalVisit() throws IOException {
         medicalVisit.setDate(LocalDate.parse(dateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         medicalVisit.setDoctor(doctorField.getText());
+        if (tmpFile != null)
+            medicalVisit.setFile(Files.readAllBytes(tmpFile.toPath()));
         this.medicalVisit = medicalVisitService.save(medicalVisit);
     }
 

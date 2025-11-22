@@ -8,6 +8,9 @@ import it.cri.demo.service.BrevetService;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +29,8 @@ public class BrevetDetails extends JDialog {
     private JButton uploadButton;
 
     private Brevet brevet;
-    private BrevetService brevetService;
+    private final BrevetService brevetService;
+    private File tmpFile;
 
     public BrevetDetails(Frame owner, Brevet brevet, BrevetService brevetService) {
         super(owner, "Dettagli brevetto", true);
@@ -38,6 +42,7 @@ public class BrevetDetails extends JDialog {
 
         this.brevet = brevet;
         this.brevetService = brevetService;
+        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {
@@ -46,9 +51,15 @@ public class BrevetDetails extends JDialog {
         });
 
         confermaButton.addActionListener(e -> {
-            updateBrevet();
-            updateFields();
-            disableFormEdit();
+            try {
+                updateBrevet();
+                updateFields();
+                disableFormEdit();
+            } catch (IOException ex) {
+                System.out.println("Error in updateBrevet(): " + ex.getMessage());
+                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: "+ ex.getMessage(),
+                        "Errore", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         deleteButton.addActionListener(e -> {
@@ -60,11 +71,19 @@ public class BrevetDetails extends JDialog {
                 dispose();
             }
         });
+        uploadButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+                tmpFile = fileChooser.getSelectedFile();
+            }
+        });
     }
 
-    private void updateBrevet() {
+    private void updateBrevet() throws IOException {
         brevet.setDate(LocalDate.parse(dateField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         brevet.setDoctor(doctorField.getText());
+        if (tmpFile != null)
+            brevet.setFile(Files.readAllBytes(tmpFile.toPath()));
         this.brevet = brevetService.save(brevet);
     }
 
