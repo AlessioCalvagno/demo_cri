@@ -3,13 +3,18 @@ package it.cri.demo.ui;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.PromotionTableModel;
+import it.cri.demo.entity.Brevet;
 import it.cri.demo.entity.Promotion;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.PromotionService;
+import it.cri.demo.ui.detaildialogs.BrevetDetails;
+import it.cri.demo.ui.detaildialogs.PromotionDetails;
 import it.cri.demo.ui.insertdialogs.PromotionForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class PromotionUI extends JDialog {
@@ -28,6 +33,26 @@ public class PromotionUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
         insertButton.addActionListener(e -> new PromotionForm(null, volunteer, promotionService).setVisible(true));
+
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // We are looking for a double-click
+                if (e.getClickCount() == 2) {
+                    int viewRow = table1.getSelectedRow();
+                    if (viewRow != -1) {
+                        // 1. Convert the view row index to the model row index
+                        int modelRow = table1.convertRowIndexToModel(viewRow);
+
+                        // 2. Retrieve the selected object
+                        Promotion selectedRecord = promotionList.get(modelRow);
+
+                        // 3. Open the detail dialog
+                        new PromotionDetails(null, selectedRecord, promotionService).setVisible(true);
+                    }
+                }
+            }
+        });
     }
 
     /**

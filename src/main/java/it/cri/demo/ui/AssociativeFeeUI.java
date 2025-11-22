@@ -4,12 +4,17 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import it.cri.demo.controller.AssociativeFeeTableModel;
 import it.cri.demo.entity.AssociativeFee;
+import it.cri.demo.entity.MedicalVisit;
 import it.cri.demo.entity.Volunteer;
 import it.cri.demo.service.AssociativeFeeService;
+import it.cri.demo.ui.detaildialogs.AssociativeFeeDetails;
+import it.cri.demo.ui.detaildialogs.MedicalVisitDetails;
 import it.cri.demo.ui.insertdialogs.AssociativeFeeForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class AssociativeFeeUI extends JDialog {
@@ -28,6 +33,26 @@ public class AssociativeFeeUI extends JDialog {
         setContentPane(mainPanel);
         setSize(800, 500);
         insertButton.addActionListener(e -> new AssociativeFeeForm(null, volunteer, associativeFeeService).setVisible(true));
+
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // We are looking for a double-click
+                if (e.getClickCount() == 2) {
+                    int viewRow = table1.getSelectedRow();
+                    if (viewRow != -1) {
+                        // 1. Convert the view row index to the model row index
+                        int modelRow = table1.convertRowIndexToModel(viewRow);
+
+                        // 2. Retrieve the selected object
+                        AssociativeFee selectedRecord = associativeFeeList.get(modelRow);
+
+                        // 3. Open the detail dialog
+                        new AssociativeFeeDetails(null, selectedRecord, associativeFeeService).setVisible(true);
+                    }
+                }
+            }
+        });
     }
 
     /**
