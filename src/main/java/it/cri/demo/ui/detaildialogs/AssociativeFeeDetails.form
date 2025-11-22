@@ -101,15 +101,6 @@
           <text value="Annulla"/>
         </properties>
       </component>
-      <component id="13846" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <text value="File"/>
-        </properties>
-      </component>
       <component id="2cffc" class="javax.swing.JButton" binding="downloadButton">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -126,6 +117,15 @@
         </constraints>
         <properties>
           <text value="Carica"/>
+        </properties>
+      </component>
+      <component id="13846" class="javax.swing.JLabel" binding="fileLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="File"/>
         </properties>
       </component>
     </children>

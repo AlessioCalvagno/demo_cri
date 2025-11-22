@@ -25,6 +25,7 @@ public class AssociativeFeeDetails extends JDialog {
     private JButton annullaButton;
     private JButton downloadButton;
     private JButton uploadButton;
+    private JLabel fileLabel;
 
     private AssociativeFee associativeFee;
     private final AssociativeFeeService associativeFeeService;
@@ -55,7 +56,7 @@ public class AssociativeFeeDetails extends JDialog {
                 disableFormEdit();
             } catch (IOException ex) {
                 System.out.println("Error in updateAssociativeFee(): " + ex.getMessage());
-                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: "+ ex.getMessage(),
+                JOptionPane.showMessageDialog(confermaButton, "Errore nell'aggiornare il record, riprova: " + ex.getMessage(),
                         "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -72,7 +73,7 @@ public class AssociativeFeeDetails extends JDialog {
 
         uploadButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
-            if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+            if (fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
                 tmpFile = fileChooser.getSelectedFile();
             }
         });
@@ -80,10 +81,10 @@ public class AssociativeFeeDetails extends JDialog {
         downloadButton.addActionListener(e -> {
             JFileChooser dirChooser = new JFileChooser();
             dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            if(dirChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+            if (dirChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
                 File selectedDir = dirChooser.getSelectedFile();
 
-                String fileName = "quota_associativa_"+ associativeFee.getYear() + ".pdf"; // Replace with your actual file name
+                String fileName = "quota_associativa_" + associativeFee.getYear() + ".pdf"; // Replace with your actual file name
                 File outputFile = new File(selectedDir, fileName);
 
                 try (FileOutputStream fos = new FileOutputStream(outputFile)) {
@@ -98,7 +99,7 @@ public class AssociativeFeeDetails extends JDialog {
                     );
                 } catch (IOException ex) {
                     System.out.println("Error in file download: " + ex.getMessage());
-                    JOptionPane.showMessageDialog(downloadButton, "Errore nel scaricare il file, riprova: "+ ex.getMessage(),
+                    JOptionPane.showMessageDialog(downloadButton, "Errore nel scaricare il file, riprova: " + ex.getMessage(),
                             "Errore", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -179,14 +180,14 @@ public class AssociativeFeeDetails extends JDialog {
         mainPanel.add(confermaButton, cc.xy(1, 9));
         annullaButton.setText("Annulla");
         mainPanel.add(annullaButton, cc.xy(2, 9));
-        final JLabel label1 = new JLabel();
-        label1.setText("File");
-        mainPanel.add(label1, cc.xyw(1, 5, 2));
         downloadButton = new JButton();
         downloadButton.setText("Scarica");
         mainPanel.add(downloadButton, cc.xyw(1, 6, 2, CellConstraints.FILL, CellConstraints.DEFAULT));
         uploadButton.setText("Carica");
         mainPanel.add(uploadButton, cc.xyw(1, 7, 2));
+        fileLabel = new JLabel();
+        fileLabel.setText("File");
+        mainPanel.add(fileLabel, cc.xyw(1, 5, 2));
     }
 
     /**
