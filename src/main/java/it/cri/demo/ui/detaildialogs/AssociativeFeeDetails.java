@@ -8,8 +8,10 @@ import it.cri.demo.service.AssociativeFeeService;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.format.DateTimeFormatter;
 
 public class AssociativeFeeDetails extends JDialog {
     private JPanel mainPanel;
@@ -72,6 +74,33 @@ public class AssociativeFeeDetails extends JDialog {
             JFileChooser fileChooser = new JFileChooser();
             if(fileChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
                 tmpFile = fileChooser.getSelectedFile();
+            }
+        });
+
+        downloadButton.addActionListener(e -> {
+            JFileChooser dirChooser = new JFileChooser();
+            dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            if(dirChooser.showOpenDialog(uploadButton) == JFileChooser.APPROVE_OPTION) {
+                File selectedDir = dirChooser.getSelectedFile();
+
+                String fileName = "quota_associativa_"+ associativeFee.getYear() + ".pdf"; // Replace with your actual file name
+                File outputFile = new File(selectedDir, fileName);
+
+                try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+                    fos.write(associativeFee.getFile());
+
+                    // Display success message
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "File salvato in: " + outputFile.getAbsolutePath(),
+                            "Download Coompletato",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                } catch (IOException ex) {
+                    System.out.println("Error in file download: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(downloadButton, "Errore nel scaricare il file, riprova: "+ ex.getMessage(),
+                            "Errore", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
