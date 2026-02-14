@@ -36,15 +36,15 @@ public class BrevetDetails extends JDialog {
 
     public BrevetDetails(Frame owner, Brevet brevet, BrevetService brevetService) {
         super(owner, "Dettagli brevetto", true);
+        this.brevet = brevet;
+        this.brevetService = brevetService;
+        this.tmpFile = null;
         $$$setupUI$$$();
         updateFields();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        this.brevet = brevet;
-        this.brevetService = brevetService;
-        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {

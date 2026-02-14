@@ -34,15 +34,15 @@ public class QualificationDetails extends JDialog {
 
     public QualificationDetails(Frame owner, Qualification qualification, QualificationService qualificationService) {
         super(owner, "Dettagli qualifica", true);
+        this.qualification = qualification;
+        this.qualificationService = qualificationService;
+        this.tmpFile = null;
         $$$setupUI$$$();
         updateFields();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        this.qualification = qualification;
-        this.qualificationService = qualificationService;
-        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {

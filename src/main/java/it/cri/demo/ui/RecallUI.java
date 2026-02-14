@@ -48,7 +48,7 @@ public class RecallUI extends JDialog {
                         Recall selectedRecord = recallList.get(modelRow);
 
                         // 3. Open the detail dialog
-                        new RecallDetails(null, selectedRecord, recallService).setVisible(true);
+                        new RecallDetails((Frame) getOwner(), selectedRecord, recallService).setVisible(true);
                     }
                 }
             }

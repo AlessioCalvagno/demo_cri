@@ -38,15 +38,15 @@ public class MedicalVisitDetails extends JDialog {
 
     public MedicalVisitDetails(Frame owner, MedicalVisit medicalVisit, MedicalVisitService medicalVisitService) {
         super(owner, "Dettagli visita medica", true);
+        this.medicalVisit = medicalVisit;
+        this.medicalVisitService = medicalVisitService;
+        this.tmpFile = null;
         $$$setupUI$$$();
         updateFields();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        this.medicalVisit = medicalVisit;
-        this.medicalVisitService = medicalVisitService;
-        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {

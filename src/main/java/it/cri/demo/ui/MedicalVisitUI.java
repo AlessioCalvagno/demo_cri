@@ -47,7 +47,7 @@ public class MedicalVisitUI extends JDialog {
                         MedicalVisit selectedVisit = medicalVisitList.get(modelRow);
 
                         // 3. Open the detail dialog
-                        new MedicalVisitDetails(null, selectedVisit, medicalVisitService).setVisible(true);
+                        new MedicalVisitDetails((Frame) getOwner(), selectedVisit, medicalVisitService).setVisible(true);
                     }
                 }
             }

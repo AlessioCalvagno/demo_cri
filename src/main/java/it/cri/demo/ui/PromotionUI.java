@@ -48,7 +48,7 @@ public class PromotionUI extends JDialog {
                         Promotion selectedRecord = promotionList.get(modelRow);
 
                         // 3. Open the detail dialog
-                        new PromotionDetails(null, selectedRecord, promotionService).setVisible(true);
+                        new PromotionDetails((Frame) getOwner(), selectedRecord, promotionService).setVisible(true);
                     }
                 }
             }

@@ -48,7 +48,7 @@ public class AssociativeFeeUI extends JDialog {
                         AssociativeFee selectedRecord = associativeFeeList.get(modelRow);
 
                         // 3. Open the detail dialog
-                        new AssociativeFeeDetails(null, selectedRecord, associativeFeeService).setVisible(true);
+                        new AssociativeFeeDetails((Frame) getOwner(), selectedRecord, associativeFeeService).setVisible(true);
                     }
                 }
             }

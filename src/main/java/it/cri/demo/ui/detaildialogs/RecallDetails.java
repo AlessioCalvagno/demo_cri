@@ -38,15 +38,15 @@ public class RecallDetails extends JDialog {
 
     public RecallDetails(Frame owner, Recall recall, RecallService recallService) {
         super(owner, "Dettagli richiamo", true);
+        this.recall = recall;
+        this.recallService = recallService;
+        this.tmpFile = null;
         $$$setupUI$$$();
         updateFields();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        this.recall = recall;
-        this.recallService = recallService;
-        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {

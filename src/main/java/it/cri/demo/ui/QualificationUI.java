@@ -47,7 +47,7 @@ public class QualificationUI extends JDialog {
                         Qualification selectedRecord = qualificationList.get(modelRow);
 
                         // 3. Open the detail dialog
-                        new QualificationDetails(null, selectedRecord, qualificationService).setVisible(true);
+                        new QualificationDetails((Frame) getOwner(), selectedRecord, qualificationService).setVisible(true);
                     }
                 }
             }

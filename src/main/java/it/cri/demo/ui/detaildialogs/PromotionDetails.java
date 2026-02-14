@@ -36,15 +36,15 @@ public class PromotionDetails extends JDialog {
 
     public PromotionDetails(Frame owner, Promotion promotion, PromotionService promotionService) {
         super(owner, "Dettagli promozione", true);
+        this.promotion = promotion;
+        this.promotionService = promotionService;
+        this.tmpFile = null;
         $$$setupUI$$$();
         updateFields();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        this.promotion = promotion;
-        this.promotionService = promotionService;
-        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {

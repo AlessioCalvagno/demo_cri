@@ -33,15 +33,15 @@ public class AssociativeFeeDetails extends JDialog {
 
     public AssociativeFeeDetails(Frame owner, AssociativeFee associativeFee, AssociativeFeeService associativeFeeService) {
         super(owner, "Dettagli quota associativa", true);
+        this.associativeFee = associativeFee;
+        this.associativeFeeService = associativeFeeService;
+        this.tmpFile = null;
         $$$setupUI$$$();
         updateFields();
         setContentPane(mainPanel);
         setSize(160, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        this.associativeFee = associativeFee;
-        this.associativeFeeService = associativeFeeService;
-        this.tmpFile = null;
 
         updateButton.addActionListener(e -> enableFormEdit());
         annullaButton.addActionListener(e -> {

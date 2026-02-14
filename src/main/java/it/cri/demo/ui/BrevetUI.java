@@ -47,7 +47,7 @@ public class BrevetUI extends JDialog {
                         Brevet selectedRecord = brevetList.get(modelRow);
 
                         // 3. Open the detail dialog
-                        new BrevetDetails(null, selectedRecord, brevetService).setVisible(true);
+                        new BrevetDetails((Frame) getOwner(), selectedRecord, brevetService).setVisible(true);
                     }
                 }
             }
